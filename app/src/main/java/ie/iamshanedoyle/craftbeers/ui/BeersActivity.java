@@ -36,6 +36,10 @@ public class BeersActivity extends ActionBarActivity {
 
     private List<Beer> mBeers = new ArrayList<>();
     private String mBeerKeywords = "";
+    private int mPageNumber = 1;
+    private int mNumberOfPages;
+    private LinearLayoutManager mLayoutManager;
+    private boolean mIsSearching;
 
     private BeersAdapter mBeersAdapter;
 
@@ -44,9 +48,9 @@ public class BeersActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beers);
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        mLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(mLayoutManager);
 
         mBeersAdapter = new BeersAdapter(this, mBeers);
         recyclerView.setAdapter(mBeersAdapter);
@@ -59,6 +63,22 @@ public class BeersActivity extends ActionBarActivity {
                             }
                         }));
 
+        recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                if (mLayoutManager != null) {
+                    int lastVisiblePosition = mLayoutManager.findLastVisibleItemPosition();
+
+                    if (lastVisiblePosition >= (mBeers.size() - 4)
+                            && mPageNumber < mNumberOfPages && !mIsSearching) {
+                        performInfiniteScrolling();
+                    }
+                }
+            }
+        });
+
         handleIntent(getIntent());
     }
 
@@ -69,7 +89,7 @@ public class BeersActivity extends ActionBarActivity {
         EventBus.getDefault().register(this);
 
         if (mBeers.size() == 0) {
-            BeersService.startActionGetBeers(this, mBeerKeywords);
+            search();
         }
     }
 
@@ -119,7 +139,7 @@ public class BeersActivity extends ActionBarActivity {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 search.clearFocus();
-                performSearch(s);
+                performKeywordSearch(s);
                 return true;
             }
         });
@@ -127,7 +147,7 @@ public class BeersActivity extends ActionBarActivity {
         search.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
-                performSearch("");
+                performKeywordSearch("");
                 return false;
             }
         });
@@ -143,14 +163,43 @@ public class BeersActivity extends ActionBarActivity {
     @SuppressWarnings("unused")
     public void onEventMainThread(GetBeersEvent getBeersEvent) {
         updateBeers(getBeersEvent.getBeers());
+        mNumberOfPages = getBeersEvent.getNumberOfPages();
+        mIsSearching = false;
     }
 
-    private void performSearch(String keywordSearch) {
+    /**
+     * Performs keyword search.
+     *
+     * @param keywordSearch A String of the keyword search.
+     */
+    private void performKeywordSearch(String keywordSearch) {
         mBeers.clear();
         mBeerKeywords = keywordSearch;
-        BeersService.startActionGetBeers(this, mBeerKeywords);
+        mPageNumber = 1;
+        search();
     }
 
+    /**
+     * Performs infinite scrolling.
+     */
+    private void performInfiniteScrolling() {
+        mPageNumber++;
+        search();
+    }
+
+    /**
+     * Performs a search.
+     */
+    private void search() {
+        mIsSearching = true;
+        BeersService.startActionGetBeers(this, mBeerKeywords, mPageNumber);
+    }
+
+    /**
+     * Updates beers.
+     *
+     * @param beers A List of Beer objects.
+     */
     private void updateBeers(List<Beer> beers) {
         if (beers != null) {
             mBeers.addAll(beers);
@@ -158,6 +207,11 @@ public class BeersActivity extends ActionBarActivity {
         }
     }
 
+    /**
+     * Handles an intent.
+     *
+     * @param intent A Intent.
+     */
     private void handleIntent(Intent intent) {
         if (intent != null && Intent.ACTION_SEARCH.equals(intent.getAction())) {
             mBeerKeywords = intent.getStringExtra(SearchManager.QUERY);
@@ -165,11 +219,15 @@ public class BeersActivity extends ActionBarActivity {
         }
     }
 
+    /**
+     * On beer clicked.
+     *
+     * @param position int Position of the beer that was clicked.
+     */
     private void onBeerClicked(int position) {
         Beer beer = mBeers.get(position);
         Intent intent = new Intent(this, BeerViewActivity.class);
         intent.putExtra(EXTRA_BEER, beer);
-
         startActivity(intent);
     }
 }

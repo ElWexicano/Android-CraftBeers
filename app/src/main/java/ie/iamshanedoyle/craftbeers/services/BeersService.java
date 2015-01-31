@@ -27,6 +27,7 @@ public class BeersService extends IntentService{
 
     public static final String EXTRA_BEER_KEYWORD = "ExtraBeerKeyword";
     public static final String EXTRA_BEER_ID = "ExtraBeerId";
+    public static final String EXTRA_PAGE = "ExtraPage";
 
     public static final String NAME = "BeersService";
 
@@ -40,11 +41,13 @@ public class BeersService extends IntentService{
      *
      * @param context A context.
      * @param beerKeyword A String of the beer keywords.
+     * @param pageNumber A int of the page number
      */
-    public static void startActionGetBeers(Context context, String beerKeyword) {
+    public static void startActionGetBeers(Context context, String beerKeyword, int pageNumber) {
         Intent intent = new Intent(context, BeersService.class);
         intent.setAction(ACTION_GET_BEERS);
         intent.putExtra(EXTRA_BEER_KEYWORD, beerKeyword);
+        intent.putExtra(EXTRA_PAGE, pageNumber);
         context.startService(intent);
     }
 
@@ -71,7 +74,8 @@ public class BeersService extends IntentService{
 
         if (ACTION_GET_BEERS.equals(action)) {
             final String keyword = intent.getStringExtra(EXTRA_BEER_KEYWORD);
-            getBeers(keyword);
+            final int page = intent.getIntExtra(EXTRA_PAGE, -1);
+            getBeers(keyword, page);
         } else if (ACTION_GET_BEER.equals(action)) {
             final String beerId = intent.getStringExtra(EXTRA_BEER_ID);
             getBeer(beerId);
@@ -83,15 +87,20 @@ public class BeersService extends IntentService{
      *
      * @param keyword A String of the beer keyword.
      */
-    private void getBeers(String keyword) {
+    private void getBeers(String keyword, int pageNumber) {
         GetBeersEvent getBeersEvent = new GetBeersEvent();
 
         String apiKey = getString(R.string.beer_api);
 
         Map<String, String> parametersMap = new HashMap<String, String>();
 
+        if (pageNumber != -1) {
+            parametersMap.put("p", Integer.toString(pageNumber));
+        }
+
         parametersMap.put("key", apiKey);
         parametersMap.put("abv", "-10");
+        parametersMap.put("withBreweries", "Y");
 
         if (keyword != null && !keyword.equals("")) {
             parametersMap.put("name", keyword);
@@ -102,6 +111,7 @@ public class BeersService extends IntentService{
                     ApiClient.getApi(this).create(BeersInterface.class).getBeers(parametersMap);
             getBeersEvent.setBeers(beersResponse.getData());
             getBeersEvent.setStatus(beersResponse.getStatus());
+            getBeersEvent.setNumberOfPages(beersResponse.getNumberOfPages());
             EventBus.getDefault().post(getBeersEvent);
         } catch (RetrofitError retrofitError) {
             getBeersEvent.setStatus("failure");

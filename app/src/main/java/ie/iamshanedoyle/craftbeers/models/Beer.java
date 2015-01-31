@@ -3,6 +3,9 @@ package ie.iamshanedoyle.craftbeers.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Represents a Beer object.
  *
@@ -13,7 +16,8 @@ public class Beer implements Parcelable {
     private String id;
     private String name;
     private String description;
-    private Labels labels;
+    private Images labels;
+    private List<Brewery> breweries;
 
     public Beer() {}
 
@@ -45,16 +49,32 @@ public class Beer implements Parcelable {
         this.description = description;
     }
 
-    public Labels getLabels() {
+    public Images getLabels() {
         return labels;
     }
 
-    public void setLabels(Labels labels) {
+    public void setLabels(Images labels) {
         this.labels = labels;
     }
 
     public boolean hasLabel() {
         return labels != null && labels.getIcon() != null;
+    }
+
+    public boolean hasBrewery() {
+        return breweries != null && breweries.size() >= 1;
+    }
+
+    public void setBreweries(List<Brewery> breweries) {
+        this.breweries = breweries;
+    }
+
+    public List<Brewery> getBreweries() {
+        return breweries;
+    }
+
+    public Brewery getBrewery() {
+        return breweries.get(0);
     }
 
     @Override
@@ -63,13 +83,16 @@ public class Beer implements Parcelable {
         dest.writeString(name);
         dest.writeString(description);
         dest.writeParcelable(labels, flags);
+        dest.writeList(breweries);
     }
 
     private void readFromParcel(Parcel parcel) {
         id = parcel.readString();
         name = parcel.readString();
         description = parcel.readString();
-        labels = parcel.readParcelable(Labels.class.getClassLoader());
+        labels = parcel.readParcelable(Images.class.getClassLoader());
+        breweries = new ArrayList<>();
+        parcel.readList(breweries, Brewery.class.getClassLoader());
     }
 
     @Override

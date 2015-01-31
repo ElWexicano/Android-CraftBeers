@@ -16,8 +16,6 @@ import retrofit.http.QueryMap;
  */
 public interface BeersInterface {
 
-    static final String API_KEY = "cedb0dbc16d9d95ed016e59aa95103dd";
-
     static final String URL_GET_BEERS = "/beers/";
     static final String URL_GET_BEER = "/beers/{beerId}/";
 
@@ -57,6 +55,7 @@ public interface BeersInterface {
     public class BeersResponse {
         protected String status;
         protected List<Beer> data;
+        protected int numberOfPages;
 
         public String getStatus() {
             return status;
@@ -64,6 +63,10 @@ public interface BeersInterface {
 
         public List<Beer> getData() {
             return data;
+        }
+
+        public int getNumberOfPages() {
+            return numberOfPages;
         }
     }
 

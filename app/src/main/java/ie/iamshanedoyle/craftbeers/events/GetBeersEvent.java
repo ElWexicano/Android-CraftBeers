@@ -14,6 +14,7 @@ public class GetBeersEvent {
 
     private String mStatus;
     private List<Beer> mBeers = new ArrayList<Beer>();
+    private int mNumberOfPages;
 
     public List<Beer> getBeers() {
         return mBeers;
@@ -29,5 +30,13 @@ public class GetBeersEvent {
 
     public String getStatus() {
         return mStatus;
+    }
+
+    public void setNumberOfPages(int numberOfPages) {
+        this.mNumberOfPages = numberOfPages;
+    }
+
+    public int getNumberOfPages() {
+        return mNumberOfPages;
     }
 }

@@ -4,18 +4,18 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Represents a Beer labels object.
+ * Represents a Images object.
  *
  * @author Shane Doyle <@ElWexicano>
  */
-public class Labels implements Parcelable {
+public class Images implements Parcelable {
     private String icon;
     private String medium;
     private String large;
 
-    public Labels() {}
+    public Images() {}
 
-    public Labels(Parcel parcel) {
+    public Images(Parcel parcel) {
         readFromParcel(parcel);
     }
 
@@ -49,14 +49,14 @@ public class Labels implements Parcelable {
         return 0;
     }
 
-    public static final Parcelable.Creator<Labels> CREATOR
-            = new Parcelable.Creator<Labels>() {
-        public Labels createFromParcel(Parcel in) {
-            return new Labels(in);
+    public static final Parcelable.Creator<Images> CREATOR
+            = new Parcelable.Creator<Images>() {
+        public Images createFromParcel(Parcel in) {
+            return new Images(in);
         }
 
-        public Labels[] newArray(int size) {
-            return new Labels[size];
+        public Images[] newArray(int size) {
+            return new Images[size];
         }
     };
 }

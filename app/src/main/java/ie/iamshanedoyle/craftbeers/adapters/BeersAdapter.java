@@ -36,8 +36,8 @@ public class BeersAdapter extends RecyclerView.Adapter<BeersAdapter.ViewHolder> 
         public ViewHolder(View v) {
             super(v);
 
-            textViewTitle = (TextView) v.findViewById(R.id.text_view_title);
-            textViewDescription = (TextView) v.findViewById(R.id.text_view_description);
+            textViewTitle = (TextView) v.findViewById(R.id.textViewBeerTitle);
+            textViewDescription = (TextView) v.findViewById(R.id.textViewBeerDescription);
         }
     }
 

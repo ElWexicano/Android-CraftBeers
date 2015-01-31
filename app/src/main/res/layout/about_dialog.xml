@@ -10,14 +10,14 @@
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:id="@+id/image_view_icon"
+        android:id="@+id/imageViewAppIcon"
         android:src="@drawable/ic_launcher"
         android:layout_gravity="center_horizontal" />
 
     <TextView
         style="@style/FillWidth"
         android:text="@string/developed_by"
-        android:id="@+id/text_view_developed_by"
+        android:id="@+id/textViewDeveloperBy"
         android:textColor="#ae000000"
         android:textSize="16sp"
         android:fontFamily="sans-serif-light"
@@ -28,7 +28,7 @@
     <TextView
         style="@style/FillWidth"
         android:text="@string/version"
-        android:id="@+id/text_view_version"
+        android:id="@+id/textViewVersion"
         android:textColor="#ae000000"
         android:textSize="16sp"
         android:fontFamily="sans-serif-condensed"

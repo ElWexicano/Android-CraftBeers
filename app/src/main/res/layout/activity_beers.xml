@@ -4,7 +4,7 @@
     tools:context=".ui.SearchBeersActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/recyclerView"
         android:scrollbars="vertical"
         android:clipToPadding="false"
         android:clipChildren="true"

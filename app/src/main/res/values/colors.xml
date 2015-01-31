@@ -4,5 +4,6 @@
     <color name="beer_red">#cb4c53</color>
     <color name="beer_dark_red">#b9595d</color>
     <color name="grey">#d0d0d0</color>
+    <color name="brewery_grey">#acacac</color>
     <color name="white">#ffffff</color>
 </resources>

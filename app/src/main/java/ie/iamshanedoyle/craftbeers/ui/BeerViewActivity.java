@@ -9,6 +9,11 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.graphics.Palette;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.AbsoluteSizeSpan;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -20,6 +25,7 @@ import com.squareup.picasso.Picasso;
 
 import ie.iamshanedoyle.craftbeers.R;
 import ie.iamshanedoyle.craftbeers.models.Beer;
+import ie.iamshanedoyle.craftbeers.models.Brewery;
 
 /**
  * This activity is used for displaying information about a beer.
@@ -48,32 +54,11 @@ public class BeerViewActivity extends ActionBarActivity {
             return;
         }
 
-        mTextViewTitle = (TextView) findViewById(R.id.text_view_title);
+        initBeerUI();
 
-        if (mTextViewTitle != null) {
-            mTextViewTitle.setText(mBeer.getName());
-        }
-
-        TextView textViewDescription = (TextView) findViewById(R.id.text_view_description);
-
-        if (textViewDescription != null) {
-            textViewDescription.setText(mBeer.getDescription());
-        }
-
-        mImageViewLabel = (ImageView) findViewById(R.id.image_view_label);
-
-        if (mImageViewLabel != null && mBeer.hasLabel()) {
-            Picasso.with(this).load(mBeer.getLabels().getIcon()).into(mImageViewLabel,
-                    new Callback.EmptyCallback() {
-                @Override
-                public void onSuccess() {
-                    getColorFromImage();
-                }
-            });
-        }
+        initBreweryUI();
 
         mActionBar = getSupportActionBar();
-
         getSupportActionBar().setTitle(mBeer.getName() + " Beer");
     }
 
@@ -93,6 +78,82 @@ public class BeerViewActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Initialises the beer UI.
+     */
+    private void initBeerUI() {
+        mTextViewTitle = (TextView) findViewById(R.id.textViewBeerTitle);
+
+        if (mTextViewTitle != null) {
+            mTextViewTitle.setText(mBeer.getName());
+        }
+
+        TextView textViewDescription = (TextView) findViewById(R.id.textViewBeerDescription);
+
+        if (textViewDescription != null) {
+            textViewDescription.setText(mBeer.getDescription());
+        }
+
+        mImageViewLabel = (ImageView) findViewById(R.id.imageViewBeerLabel);
+
+        if (mImageViewLabel != null && mBeer.hasLabel()) {
+            Picasso.with(this).load(mBeer.getLabels().getIcon()).into(mImageViewLabel,
+                    new Callback.EmptyCallback() {
+                        @Override
+                        public void onSuccess() {
+                            getColorFromImage();
+                        }
+                    });
+        }
+    }
+
+    /**
+     * Initialises the brewery UI.
+     */
+    private void initBreweryUI() {
+        if (!mBeer.hasBrewery()) {
+            return;
+        }
+
+        Brewery brewery = mBeer.getBrewery();
+
+        TextView textViewBreweryTitle = (TextView) findViewById(R.id.textViewBreweryTitle);
+
+        if (textViewBreweryTitle != null && brewery.getName() != null) {
+
+            SpannableString spannableString = new SpannableString(brewery.getName());
+
+            if (brewery.getEstablished() != null) {
+                int size = spannableString.length();
+
+                spannableString = new SpannableString(brewery.getName()
+                        + "\nEstablished in " + brewery.getEstablished());
+
+                spannableString.setSpan(new ForegroundColorSpan(
+                        getResources().getColor(R.color.brewery_grey)), size,
+                        spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                spannableString.setSpan(new RelativeSizeSpan(0.8f), size,
+                        spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+
+            textViewBreweryTitle.setText(spannableString);
+        }
+
+        TextView textViewBreweryDescription = (TextView)
+                findViewById(R.id.textViewBreweryDescription);
+
+        if (textViewBreweryDescription != null && brewery.getDescription() != null) {
+            textViewBreweryDescription.setText(brewery.getDescription());
+
+        }
+
+        ImageView imageViewBreweryImage = (ImageView) findViewById(R.id.imageViewBrewery);
+
+        if (imageViewBreweryImage != null && brewery.hasImage()) {
+            Picasso.with(this).load(brewery.getImage()).into(imageViewBreweryImage);
+        }
     }
 
     /**

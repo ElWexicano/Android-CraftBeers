@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" style="@style/FillWidth">
+
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_gravity="center"
+        android:background="#ffffff"
+        android:foreground="?selectableItemBackground"
+        style="@style/FillWidth"
+        card_view:cardCornerRadius="4dp"
+        android:layout_margin="10dp"
+        android:clickable="true">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="10dp"
+            style="@style/Fill">
+
+            <TextView
+                android:id="@+id/text_view_title"
+                style="@style/Match"
+                android:textColor="#6c6c6c"
+                android:textSize="20sp"
+                android:fontFamily="sans-serif-light"
+                android:paddingBottom="10dp"/>
+
+            <TextView
+                android:id="@+id/text_view_description"
+                style="@style/Match"
+                android:textColor="#7f7f7f"
+                android:textSize="14sp"
+                android:minLines="2"
+                android:maxLines="2"
+                android:ellipsize="end"/>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

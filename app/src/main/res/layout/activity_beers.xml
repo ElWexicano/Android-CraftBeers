@@ -1,0 +1,13 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/ActivityBase"
+    tools:context=".ui.SearchBeersActivity">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:scrollbars="vertical"
+        android:clipToPadding="false"
+        android:clipChildren="true"
+        style="@style/Match"/>
+
+</RelativeLayout>

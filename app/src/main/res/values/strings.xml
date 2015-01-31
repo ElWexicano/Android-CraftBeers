@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Craft Beers</string>
+    <string name="action_about">About</string>
+    <string name="title_activity_beer_view">BeerViewActivity</string>
+    <string name="search_hint">Search Beers</string>
+    <string name="search">Search</string>
+    <string name="developed_by">Developed by @ElWexicano</string>
+    <string name="version">Version 1.0.0</string>
+    <string name="transition_title">transition_title</string>
+    <string name="transition_description">transition_description</string>
+    <string name="transition_card">transition_card</string>
+
+</resources>

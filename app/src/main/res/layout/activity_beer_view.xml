@@ -1,0 +1,58 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/ActivityBase"
+    tools:context=".ui.BeerViewActivity">
+
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:background="#ffffff"
+        style="@style/FillWidth"
+        card_view:cardCornerRadius="0dp"
+        android:clickable="true">
+
+        <RelativeLayout
+            style="@style/Wrap">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/image_view_label"
+                android:background="#ccc"
+                android:layout_margin="10dp"/>
+
+            <TextView
+                android:id="@+id/text_view_title"
+                style="@style/FillWidth"
+                android:textColor="#6c6c6c"
+                android:textSize="20sp"
+                android:gravity="center_vertical"
+                android:fontFamily="sans-serif-light"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@+id/image_view_label"
+                android:layout_toEndOf="@+id/image_view_label"
+                android:layout_alignBottom="@+id/image_view_label"
+                android:layout_alignTop="@+id/image_view_label" />
+
+            <TextView
+                android:id="@+id/text_view_description"
+                style="@style/FillWidth"
+                android:textColor="#7f7f7f"
+                android:textSize="14sp"
+                android:layout_margin="10dp"
+                android:layout_below="@+id/text_view_title"/>
+
+            <View
+                android:id="@+id/divider"
+                style="@style/FillWidth"
+                android:layout_height="1dp"
+                android:layout_below="@+id/text_view_description"
+                android:background="@color/grey"
+                android:layout_marginBottom="10dp"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</ScrollView>

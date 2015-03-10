@@ -2,10 +2,14 @@ package ie.iamshanedoyle.craftbeers.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -32,12 +36,16 @@ public class BeersAdapter extends RecyclerView.Adapter<BeersAdapter.ViewHolder> 
 
         TextView textViewTitle;
         TextView textViewDescription;
+        TextView textViewBreweryTitle;
+        ImageView imageViewLabel;
 
         public ViewHolder(View v) {
             super(v);
 
             textViewTitle = (TextView) v.findViewById(R.id.textViewBeerTitle);
             textViewDescription = (TextView) v.findViewById(R.id.textViewBeerDescription);
+            textViewBreweryTitle = (TextView) v.findViewById(R.id.textViewBreweryTitle);
+            imageViewLabel = (ImageView) v.findViewById(R.id.imageViewBeerLabel);
         }
     }
 
@@ -54,6 +62,21 @@ public class BeersAdapter extends RecyclerView.Adapter<BeersAdapter.ViewHolder> 
 
         viewHolder.textViewTitle.setText(beer.getName());
         viewHolder.textViewDescription.setText(beer.getDescription());
+
+        if (beer.hasBrewery()) {
+            String brewedBy = String.format(mContextReference.get().getString(R.string.brewed_by),
+                    beer.getBrewery().getName(), "2001");
+            CharSequence styledText = Html.fromHtml(brewedBy);
+            viewHolder.textViewBreweryTitle.setText(styledText);
+        } else {
+            viewHolder.textViewBreweryTitle.setText("No Brewery :-(");
+        }
+
+        if (beer.hasLabel()) {
+            Picasso.with(mContextReference.get())
+                    .load(beer.getLabels().getMedium())
+                    .into(viewHolder.imageViewLabel);
+        }
     }
 
     @Override
@@ -61,6 +84,11 @@ public class BeersAdapter extends RecyclerView.Adapter<BeersAdapter.ViewHolder> 
         return mBeers.size();
     }
 
+    /**
+     * Updates the beers in the adapter.
+     *
+     * @param beers A List of Beer objects.
+     */
     public void updateBeers(List<Beer> beers) {
         mBeers = beers;
         notifyDataSetChanged();

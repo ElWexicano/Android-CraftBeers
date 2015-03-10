@@ -160,6 +160,11 @@ public class BeersActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Called when we receive a GetBeersEvent.
+     *
+     * @param getBeersEvent A GetBeersEvent object. Contains a list of beers.
+     */
     @SuppressWarnings("unused")
     public void onEventMainThread(GetBeersEvent getBeersEvent) {
         updateBeers(getBeersEvent.getBeers());

@@ -6,4 +6,9 @@
     <color name="grey">#d0d0d0</color>
     <color name="brewery_grey">#acacac</color>
     <color name="white">#ffffff</color>
+    <color name="empty_hint_grey">#DE8D8D8D</color>
+    <color name="empty_hint_shadow">#4D000000</color>
+    <color name="empty_title_grey">#DE515151</color>
+    <color name="empty_title_shadow">#80000000</color>
+    <color name="brown">#E98146</color>
 </resources>

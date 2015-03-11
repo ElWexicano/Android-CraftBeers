@@ -3,11 +3,18 @@
     style="@style/ActivityBase"
     tools:context=".ui.SearchBeersActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:scrollbars="vertical"
-        android:clipToPadding="false"
-        android:clipChildren="true"
-        style="@style/Match"/>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        style="@style/Match">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:scrollbars="vertical"
+            android:clipToPadding="false"
+            android:clipChildren="true"
+            style="@style/Match"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <include layout="@layout/empty_state" />
 
 </RelativeLayout>

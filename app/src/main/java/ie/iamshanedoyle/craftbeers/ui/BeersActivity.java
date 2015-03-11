@@ -3,6 +3,7 @@ package ie.iamshanedoyle.craftbeers.ui;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,17 +32,27 @@ import ie.iamshanedoyle.craftbeers.services.BeersService;
  */
 public class BeersActivity extends ActionBarActivity {
 
+    /**
+     * Constants.
+     */
     public static final String EXTRA_BEER = "ExtraBeer";
     public static final String EXTRA_BEERS = "ExtraBeers";
 
+    /**
+     * Mutables.
+     */
     private List<Beer> mBeers = new ArrayList<>();
     private String mBeerKeywords = "";
     private int mPageNumber = 1;
     private int mNumberOfPages;
     private LinearLayoutManager mLayoutManager;
     private boolean mIsSearching;
-
     private BeersAdapter mBeersAdapter;
+
+    /**
+     * Views
+     */
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +80,11 @@ public class BeersActivity extends ActionBarActivity {
                 super.onScrolled(recyclerView, dx, dy);
 
                 if (mLayoutManager != null) {
+                    int firstVisiblePosition =
+                            mLayoutManager.findFirstCompletelyVisibleItemPosition();
+
+                    mSwipeRefreshLayout.setEnabled(firstVisiblePosition == 0);
+
                     int lastVisiblePosition = mLayoutManager.findLastVisibleItemPosition();
 
                     if (lastVisiblePosition >= (mBeers.size() - 4)
@@ -76,6 +92,17 @@ public class BeersActivity extends ActionBarActivity {
                         performInfiniteScrolling();
                     }
                 }
+            }
+        });
+
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.beer_red, R.color.beer_dark_red,
+                R.color.beer_red, R.color.beer_dark_red);
+
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshBeers();
             }
         });
 
@@ -173,6 +200,13 @@ public class BeersActivity extends ActionBarActivity {
     }
 
     /**
+     * Refreshes the list of beers.
+     */
+    private void refreshBeers() {
+        performKeywordSearch(mBeerKeywords);
+    }
+
+    /**
      * Performs keyword search.
      *
      * @param keywordSearch A String of the keyword search.
@@ -190,12 +224,14 @@ public class BeersActivity extends ActionBarActivity {
     private void performInfiniteScrolling() {
         mPageNumber++;
         search();
+
     }
 
     /**
      * Performs a search.
      */
     private void search() {
+        mSwipeRefreshLayout.setRefreshing(true);
         mIsSearching = true;
         BeersService.startActionGetBeers(this, mBeerKeywords, mPageNumber);
     }
@@ -209,7 +245,32 @@ public class BeersActivity extends ActionBarActivity {
         if (beers != null) {
             mBeers.addAll(beers);
             mBeersAdapter.notifyDataSetChanged();
+            hideEmptyView();
+        } else {
+            if (mBeers == null || mBeers.isEmpty()) {
+                showEmptyView();
+            }
         }
+        mSwipeRefreshLayout.setRefreshing(false);
+        mSwipeRefreshLayout.setEnabled(false);
+    }
+
+    /**
+     * Shows the empty view.
+     */
+    private void showEmptyView() {
+        findViewById(R.id.imageViewEmpty).setVisibility(View.VISIBLE);
+        findViewById(R.id.textViewEmptyTitle).setVisibility(View.VISIBLE);
+        findViewById(R.id.textViewEmptyHint).setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * Hides the empty view.
+     */
+    private void hideEmptyView() {
+        findViewById(R.id.imageViewEmpty).setVisibility(View.INVISIBLE);
+        findViewById(R.id.textViewEmptyTitle).setVisibility(View.INVISIBLE);
+        findViewById(R.id.textViewEmptyHint).setVisibility(View.INVISIBLE);
     }
 
     /**

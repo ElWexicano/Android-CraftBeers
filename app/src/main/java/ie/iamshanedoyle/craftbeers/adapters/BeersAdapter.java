@@ -61,7 +61,12 @@ public class BeersAdapter extends RecyclerView.Adapter<BeersAdapter.ViewHolder> 
         Beer beer = mBeers.get(i);
 
         viewHolder.textViewTitle.setText(beer.getName());
-        viewHolder.textViewDescription.setText(beer.getDescription());
+
+        if (beer.getDescription() == null || beer.getDescription().isEmpty()) {
+            viewHolder.textViewDescription.setText("Description unavailable.");
+        } else {
+            viewHolder.textViewDescription.setText(beer.getDescription());
+        }
 
         if (beer.hasBrewery()) {
             String brewedBy = String.format(mContextReference.get().getString(R.string.brewed_by),
@@ -69,13 +74,16 @@ public class BeersAdapter extends RecyclerView.Adapter<BeersAdapter.ViewHolder> 
             CharSequence styledText = Html.fromHtml(brewedBy);
             viewHolder.textViewBreweryTitle.setText(styledText);
         } else {
-            viewHolder.textViewBreweryTitle.setText("No Brewery :-(");
+            viewHolder.textViewBreweryTitle.setText("No Brewery Info Available");
         }
 
         if (beer.hasLabel()) {
             Picasso.with(mContextReference.get())
                     .load(beer.getLabels().getMedium())
+                    .placeholder(R.drawable.placeholder)
                     .into(viewHolder.imageViewLabel);
+        } else {
+            viewHolder.imageViewLabel.setImageResource(R.drawable.placeholder);
         }
     }
 

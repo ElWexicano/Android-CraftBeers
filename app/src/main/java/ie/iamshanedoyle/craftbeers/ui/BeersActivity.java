@@ -41,6 +41,7 @@ public class BeersActivity extends ActionBarActivity {
     private static final String EXTRA_KEYWORDS = "ExtraKeywords";
     private static final String EXTRA_PAGE_NUMBER = "ExtraPageNumber";
     private static final String EXTRA_NUMBER_OF_PAGES = "ExtraNumberOfPages";
+    private static final String GMS_SEARCH_ACTION = "com.google.android.gms.actions.SEARCH_ACTION";
 
     /**
      * Mutables.
@@ -62,6 +63,12 @@ public class BeersActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beers);
+
+        String action = getIntent().getAction();
+        if (action.equals(Intent.ACTION_SEARCH) ||
+                action.equals(GMS_SEARCH_ACTION)) {
+            mBeerKeywords = getIntent().getStringExtra(SearchManager.QUERY);
+        }
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mLayoutManager = new LinearLayoutManager(this);
@@ -196,6 +203,10 @@ public class BeersActivity extends ActionBarActivity {
                 return false;
             }
         });
+
+        if (mBeerKeywords != null && !mBeerKeywords.isEmpty()) {
+            search.setQuery(mBeerKeywords, false);
+        }
 
         return true;
     }

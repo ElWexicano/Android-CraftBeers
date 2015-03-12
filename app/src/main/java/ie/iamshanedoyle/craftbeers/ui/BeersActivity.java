@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -171,6 +172,7 @@ public class BeersActivity extends ActionBarActivity {
         final SearchView search = (SearchView) menu.findItem(R.id.search).getActionView();
 
         search.setSearchableInfo(manager.getSearchableInfo(getComponentName()));
+        search.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
 
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 

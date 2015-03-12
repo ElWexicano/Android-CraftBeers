@@ -3,10 +3,10 @@ package ie.iamshanedoyle.craftbeers.ui;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -90,9 +90,14 @@ public class BeersActivity extends ActionBarActivity {
 
                     int lastVisiblePosition = mLayoutManager.findLastVisibleItemPosition();
 
-                    if (lastVisiblePosition >= (mBeers.size() - 4)
-                            && mPageNumber < mNumberOfPages && !mIsSearching) {
-                        performInfiniteScrolling();
+                    if (lastVisiblePosition >= (mBeers.size() - 4) && !mIsSearching) {
+
+                        if (mPageNumber < mNumberOfPages) {
+                            performInfiniteScrolling();
+                        } else {
+                            showNoMoreBeers();
+                        }
+
                     }
                 }
             }
@@ -230,7 +235,6 @@ public class BeersActivity extends ActionBarActivity {
     private void performInfiniteScrolling() {
         mPageNumber++;
         search();
-
     }
 
     /**
@@ -277,6 +281,13 @@ public class BeersActivity extends ActionBarActivity {
         findViewById(R.id.imageViewEmpty).setVisibility(View.INVISIBLE);
         findViewById(R.id.textViewEmptyTitle).setVisibility(View.INVISIBLE);
         findViewById(R.id.textViewEmptyHint).setVisibility(View.INVISIBLE);
+    }
+
+    /**
+     * Shows a no more beers toast.
+     */
+    private void showNoMoreBeers() {
+        Toast.makeText(this, "No More Beers", Toast.LENGTH_SHORT).show();
     }
 
     /**

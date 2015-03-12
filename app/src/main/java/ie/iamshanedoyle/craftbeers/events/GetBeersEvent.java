@@ -10,9 +10,8 @@ import ie.iamshanedoyle.craftbeers.models.Beer;
  *
  * @author Shane Doyle <@ElWexicano>
  */
-public class GetBeersEvent {
+public class GetBeersEvent extends Event {
 
-    private String mStatus;
     private List<Beer> mBeers = new ArrayList<Beer>();
     private int mNumberOfPages;
 
@@ -24,19 +23,11 @@ public class GetBeersEvent {
         this.mBeers = beers;
     }
 
-    public void setStatus(String status) {
-        this.mStatus = status;
-    }
-
-    public String getStatus() {
-        return mStatus;
+    public int getNumberOfPages() {
+        return mNumberOfPages;
     }
 
     public void setNumberOfPages(int numberOfPages) {
         this.mNumberOfPages = numberOfPages;
-    }
-
-    public int getNumberOfPages() {
-        return mNumberOfPages;
     }
 }

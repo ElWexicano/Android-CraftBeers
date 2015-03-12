@@ -11,6 +11,7 @@ import de.greenrobot.event.EventBus;
 import ie.iamshanedoyle.craftbeers.R;
 import ie.iamshanedoyle.craftbeers.api.ApiClient;
 import ie.iamshanedoyle.craftbeers.api.BeersInterface;
+import ie.iamshanedoyle.craftbeers.events.Event;
 import ie.iamshanedoyle.craftbeers.events.GetBeerEvent;
 import ie.iamshanedoyle.craftbeers.events.GetBeersEvent;
 import retrofit.RetrofitError;
@@ -30,6 +31,8 @@ public class BeersService extends IntentService{
     public static final String EXTRA_PAGE = "ExtraPage";
 
     public static final String NAME = "BeersService";
+
+    private String mApiKey;
 
     public BeersService() {
         super(NAME);
@@ -70,12 +73,20 @@ public class BeersService extends IntentService{
             return;
         }
 
+        mApiKey = getString(R.string.beer_api);
+
         final String action = intent.getAction();
 
         if (ACTION_GET_BEERS.equals(action)) {
             final String keyword = intent.getStringExtra(EXTRA_BEER_KEYWORD);
             final int page = intent.getIntExtra(EXTRA_PAGE, -1);
-            getBeers(keyword, page);
+
+            if (keyword == null || keyword.isEmpty()) {
+                getBeers(page);
+            } else {
+                searchBeers(keyword, page);
+            }
+
         } else if (ACTION_GET_BEER.equals(action)) {
             final String beerId = intent.getStringExtra(EXTRA_BEER_ID);
             getBeer(beerId);
@@ -85,12 +96,10 @@ public class BeersService extends IntentService{
     /**
      * Used to get a beer. Will post a GetBeersEvent.
      *
-     * @param keyword A String of the beer keyword.
+     * @param pageNumber A int of the page number.
      */
-    private void getBeers(String keyword, int pageNumber) {
+    private void getBeers(int pageNumber) {
         GetBeersEvent getBeersEvent = new GetBeersEvent();
-
-        String apiKey = getString(R.string.beer_api);
 
         Map<String, String> parametersMap = new HashMap<String, String>();
 
@@ -98,26 +107,54 @@ public class BeersService extends IntentService{
             parametersMap.put("p", Integer.toString(pageNumber));
         }
 
-        parametersMap.put("key", apiKey);
+        parametersMap.put("key", mApiKey);
         parametersMap.put("abv", "-10");
         parametersMap.put("withBreweries", "Y");
-
-        if (keyword != null && !keyword.equals("")) {
-            parametersMap.put("name", keyword);
-        }
 
         try {
             BeersInterface.BeersResponse beersResponse =
                     ApiClient.getApi(this).create(BeersInterface.class).getBeers(parametersMap);
             getBeersEvent.setBeers(beersResponse.getData());
-            getBeersEvent.setStatus(beersResponse.getStatus());
+            getBeersEvent.setStatus(Event.Status.SUCCESSFUL);
             getBeersEvent.setNumberOfPages(beersResponse.getNumberOfPages());
             EventBus.getDefault().post(getBeersEvent);
         } catch (RetrofitError retrofitError) {
-            getBeersEvent.setStatus("failure");
+            getBeersEvent.setStatus(Event.Status.FAILED);
         }
 
     }
+
+    /**
+     * Search for beers. Will post a GetBeersEvent.
+     *
+     * @param keyword A String of keywords to use in the query.
+     * @param pageNumber A int of the page number.
+     */
+    private void searchBeers(String keyword, int pageNumber) {
+        GetBeersEvent getBeersEvent = new GetBeersEvent();
+
+        Map<String, String> parametersMap = new HashMap<String, String>();
+
+        if (pageNumber != -1) {
+            parametersMap.put("p", Integer.toString(pageNumber));
+        }
+
+        parametersMap.put("key", mApiKey);
+        parametersMap.put("q", keyword);
+        parametersMap.put("type", "beer");
+
+        try {
+            BeersInterface.BeersResponse beersResponse =
+                    ApiClient.getApi(this).create(BeersInterface.class).searchBeers(parametersMap);
+            getBeersEvent.setBeers(beersResponse.getData());
+            getBeersEvent.setStatus(Event.Status.SUCCESSFUL);
+            getBeersEvent.setNumberOfPages(beersResponse.getNumberOfPages());
+            EventBus.getDefault().post(getBeersEvent);
+        } catch (RetrofitError retrofitError) {
+            getBeersEvent.setStatus(Event.Status.FAILED);
+        }
+    }
+
 
     /**
      * Used to get a beer. Will post a GetBeerEvent.
@@ -127,17 +164,14 @@ public class BeersService extends IntentService{
     private void getBeer(String beerId) {
         GetBeerEvent getBeerEvent = new GetBeerEvent();
 
-        String apiKey = getString(R.string.beer_api);
-
         try {
             BeersInterface.BeerResponse beerResponse =
-                    ApiClient.getApi(this).create(BeersInterface.class).getBeer(beerId, apiKey);
+                    ApiClient.getApi(this).create(BeersInterface.class).getBeer(beerId, mApiKey);
             getBeerEvent.setBeer(beerResponse.getData());
-            getBeerEvent.setStatus(beerResponse.getStatus());
+            getBeerEvent.setStatus(Event.Status.SUCCESSFUL);
             EventBus.getDefault().post(getBeerEvent);
         } catch (RetrofitError retrofitError) {
-            getBeerEvent.setStatus("failure");
+            getBeerEvent.setStatus(Event.Status.FAILED);
         }
-
     }
 }

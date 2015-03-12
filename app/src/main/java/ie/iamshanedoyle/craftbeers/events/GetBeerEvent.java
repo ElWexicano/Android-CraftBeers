@@ -7,24 +7,16 @@ import ie.iamshanedoyle.craftbeers.models.Beer;
  *
  * @author Shane Doyle <@ElWexicano>
  */
-public class GetBeerEvent {
+public class GetBeerEvent extends Event {
 
-    private String mStatus;
     private Beer mBeer;
-
-    public void setBeer(Beer beer) {
-        this.mBeer = beer;
-    }
 
     public Beer getBeer() {
         return mBeer;
     }
 
-    public void setStatus(String status) {
-        this.mStatus = status;
+    public void setBeer(Beer beer) {
+        this.mBeer = beer;
     }
 
-    public String getStatus() {
-        return mStatus;
-    }
 }

@@ -18,6 +18,7 @@ public interface BeersInterface {
 
     static final String URL_GET_BEERS = "/beers/";
     static final String URL_GET_BEER = "/beers/{beerId}/";
+    static final String URL_SEARCH_BEERS = "/search/";
 
     static final String PATH_BEER_ID = "beerId";
 
@@ -26,6 +27,9 @@ public interface BeersInterface {
 
     @GET(URL_GET_BEER)
     BeerResponse getBeer(@Path(PATH_BEER_ID) String beerId, @Query("key") String key);
+
+    @GET(URL_SEARCH_BEERS)
+    BeersResponse searchBeers(@QueryMap Map<String, String> parameters);
 
     /**
      * A simple beer response.

@@ -3,6 +3,7 @@ package ie.iamshanedoyle.craftbeers.ui;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -10,7 +11,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -36,7 +36,10 @@ public class BeersActivity extends ActionBarActivity {
      * Constants.
      */
     public static final String EXTRA_BEER = "ExtraBeer";
-    public static final String EXTRA_BEERS = "ExtraBeers";
+    private static final String EXTRA_BEERS = "ExtraBeers";
+    private static final String EXTRA_KEYWORDS = "ExtraKeywords";
+    private static final String EXTRA_PAGE_NUMBER = "ExtraPageNumber";
+    private static final String EXTRA_NUMBER_OF_PAGES = "ExtraNumberOfPages";
 
     /**
      * Mutables.
@@ -134,16 +137,24 @@ public class BeersActivity extends ActionBarActivity {
         if (mBeers != null) {
             outState.putParcelableArrayList(EXTRA_BEERS, new ArrayList<> (mBeers));
         }
+
+        outState.putString(EXTRA_KEYWORDS, mBeerKeywords);
+        outState.putInt(EXTRA_PAGE_NUMBER, mPageNumber);
+        outState.putInt(EXTRA_NUMBER_OF_PAGES, mNumberOfPages);
     }
 
     @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
         if (savedInstanceState.containsKey(EXTRA_BEERS)) {
             mBeers = savedInstanceState.getParcelableArrayList(EXTRA_BEERS);
-            updateBeers(mBeers);
+            mBeersAdapter.updateBeers(mBeers);
         }
+
+        mBeerKeywords = savedInstanceState.getString(EXTRA_KEYWORDS);
+        mPageNumber = savedInstanceState.getInt(EXTRA_PAGE_NUMBER, 1);
+        mNumberOfPages = savedInstanceState.getInt(EXTRA_NUMBER_OF_PAGES, -1);
     }
 
     @Override
@@ -180,11 +191,6 @@ public class BeersActivity extends ActionBarActivity {
         });
 
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
     }
 
     /**

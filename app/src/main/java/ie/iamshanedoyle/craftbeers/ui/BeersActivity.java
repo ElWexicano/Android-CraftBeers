@@ -16,11 +16,14 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
+import ie.iamshanedoyle.craftbeers.CraftBeersApplication;
 import ie.iamshanedoyle.craftbeers.R;
 import ie.iamshanedoyle.craftbeers.adapters.BeersAdapter;
 import ie.iamshanedoyle.craftbeers.adapters.RecyclerItemClickListener;
@@ -40,6 +43,7 @@ public class BeersActivity extends ActionBarActivity {
      * Constants.
      */
     public static final String EXTRA_BEER = "ExtraBeer";
+    private static final String SCREEN_NAME = "BeersScreen";
     private static final String EXTRA_BEERS = "ExtraBeers";
     private static final String EXTRA_KEYWORDS = "ExtraKeywords";
     private static final String EXTRA_PAGE_NUMBER = "ExtraPageNumber";
@@ -68,6 +72,11 @@ public class BeersActivity extends ActionBarActivity {
         setContentView(R.layout.activity_beers);
 
         Fabric.with(this, new Crashlytics());
+
+        // Google Analytics Screen Tagging.
+        Tracker t = ((CraftBeersApplication) getApplication()).getTracker();
+        t.setScreenName(SCREEN_NAME);
+        t.send(new HitBuilders.ScreenViewBuilder().build());
 
         String action = getIntent().getAction();
         if (action.equals(Intent.ACTION_SEARCH) ||

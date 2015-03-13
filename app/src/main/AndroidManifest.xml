@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ie.iamshanedoyle.craftbeers" >
+    package="ie.iamshanedoyle.craftbeers">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -10,10 +10,10 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".ui.BeersActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,7 +39,7 @@
         <activity
             android:name=".ui.BeerViewActivity"
             android:label="@string/title_activity_beer_view"
-            android:parentActivityName=".ui.BeersActivity" >
+            android:parentActivityName=".ui.BeersActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.BeersActivity" />
@@ -47,6 +47,9 @@
 
         <service android:name=".services.BeersService" />
 
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="34e46ee6a214c081f51ec1074724ccf3508f1d88" />
     </application>
 
 </manifest>

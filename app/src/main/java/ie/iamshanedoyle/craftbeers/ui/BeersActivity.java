@@ -15,6 +15,8 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +27,7 @@ import ie.iamshanedoyle.craftbeers.adapters.RecyclerItemClickListener;
 import ie.iamshanedoyle.craftbeers.events.GetBeersEvent;
 import ie.iamshanedoyle.craftbeers.models.Beer;
 import ie.iamshanedoyle.craftbeers.services.BeersService;
+import io.fabric.sdk.android.Fabric;
 
 /**
  * This activity is used for displaying a list of beers.
@@ -63,6 +66,8 @@ public class BeersActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beers);
+
+        Fabric.with(this, new Crashlytics());
 
         String action = getIntent().getAction();
         if (action.equals(Intent.ACTION_SEARCH) ||

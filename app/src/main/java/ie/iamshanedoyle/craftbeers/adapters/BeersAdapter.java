@@ -32,23 +32,6 @@ public class BeersAdapter extends RecyclerView.Adapter<BeersAdapter.ViewHolder> 
         mContextReference = new WeakReference<>(context);
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-
-        TextView textViewTitle;
-        TextView textViewDescription;
-        TextView textViewBreweryTitle;
-        ImageView imageViewLabel;
-
-        public ViewHolder(View v) {
-            super(v);
-
-            textViewTitle = (TextView) v.findViewById(R.id.textViewBeerTitle);
-            textViewDescription = (TextView) v.findViewById(R.id.textViewBeerDescription);
-            textViewBreweryTitle = (TextView) v.findViewById(R.id.textViewBreweryTitle);
-            imageViewLabel = (ImageView) v.findViewById(R.id.imageViewBeerLabel);
-        }
-    }
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext())
@@ -69,8 +52,15 @@ public class BeersAdapter extends RecyclerView.Adapter<BeersAdapter.ViewHolder> 
         }
 
         if (beer.hasBrewery()) {
+
+            String brewedYear = "";
+
+            if (beer.getYear() != 0) {
+                brewedYear = "since " + beer.getYear();
+            }
+
             String brewedBy = String.format(mContextReference.get().getString(R.string.brewed_by),
-                    beer.getBrewery().getName(), "2001");
+                    beer.getBrewery().getName(), brewedYear);
             CharSequence styledText = Html.fromHtml(brewedBy);
             viewHolder.textViewBreweryTitle.setText(styledText);
         } else {
@@ -100,5 +90,22 @@ public class BeersAdapter extends RecyclerView.Adapter<BeersAdapter.ViewHolder> 
     public void updateBeers(List<Beer> beers) {
         mBeers = beers;
         notifyDataSetChanged();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+
+        TextView textViewTitle;
+        TextView textViewDescription;
+        TextView textViewBreweryTitle;
+        ImageView imageViewLabel;
+
+        public ViewHolder(View v) {
+            super(v);
+
+            textViewTitle = (TextView) v.findViewById(R.id.textViewBeerTitle);
+            textViewDescription = (TextView) v.findViewById(R.id.textViewBeerDescription);
+            textViewBreweryTitle = (TextView) v.findViewById(R.id.textViewBreweryTitle);
+            imageViewLabel = (ImageView) v.findViewById(R.id.imageViewBeerLabel);
+        }
     }
 }

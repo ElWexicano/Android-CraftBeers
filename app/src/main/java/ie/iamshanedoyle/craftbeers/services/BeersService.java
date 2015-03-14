@@ -21,7 +21,7 @@ import retrofit.RetrofitError;
  *
  * @author Shane Doyle <@ElWexicano>
  */
-public class BeersService extends IntentService{
+public class BeersService extends IntentService {
 
     public static final String ACTION_GET_BEERS = "ActionGetBeers";
     public static final String ACTION_GET_BEER = "ActionGetBeer";
@@ -42,9 +42,9 @@ public class BeersService extends IntentService{
     /**
      * Starts the BeersService with GetBeers action.
      *
-     * @param context A context.
+     * @param context     A context.
      * @param beerKeyword A String of the beer keywords.
-     * @param pageNumber A int of the page number
+     * @param pageNumber  A int of the page number
      */
     public static void startActionGetBeers(Context context, String beerKeyword, int pageNumber) {
         Intent intent = new Intent(context, BeersService.class);
@@ -58,7 +58,7 @@ public class BeersService extends IntentService{
      * Starts the BeersService with GetBeer action.
      *
      * @param context A context.
-     * @param beerId A String of the beer id.
+     * @param beerId  A String of the beer id.
      */
     public static void startActionGetBeer(Context context, String beerId) {
         Intent intent = new Intent(context, BeersService.class);
@@ -127,7 +127,7 @@ public class BeersService extends IntentService{
     /**
      * Search for beers. Will post a GetBeersEvent.
      *
-     * @param keyword A String of keywords to use in the query.
+     * @param keyword    A String of keywords to use in the query.
      * @param pageNumber A int of the page number.
      */
     private void searchBeers(String keyword, int pageNumber) {
@@ -142,6 +142,7 @@ public class BeersService extends IntentService{
         parametersMap.put("key", mApiKey);
         parametersMap.put("q", keyword);
         parametersMap.put("type", "beer");
+        parametersMap.put("withBreweries", "Y");
 
         try {
             BeersInterface.BeersResponse beersResponse =

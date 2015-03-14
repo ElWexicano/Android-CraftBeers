@@ -6,7 +6,9 @@ import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
 
 /**
- * Created by shane on 13/03/15.
+ * Extends the Application.
+ *
+ * @author Shane Doyle <@ElWexicano>
  */
 public class CraftBeersApplication extends Application {
 

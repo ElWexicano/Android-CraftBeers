@@ -134,6 +134,56 @@ public class Beer implements Parcelable {
         this.style = style;
     }
 
+    public String getStyleAsString() {
+        String style = "N/A";
+
+        if (this.style != null && this.style.getName() != null) {
+            style = this.style.getName();
+        }
+
+        return style;
+    }
+
+    public String getIbuAsString() {
+        String ibu = "N/A";
+
+        if (this.ibu != null) {
+            ibu = this.ibu;
+        }
+
+        return ibu;
+    }
+
+    public String getAbvAsString() {
+        String abv = "N/A";
+
+        if (this.abv != null) {
+            abv = this.abv;
+        }
+
+        return abv;
+    }
+
+    public String getGlassAsString() {
+        String glass = "N/A";
+
+        if (this.glass != null && this.glass.getName() != null) {
+            glass = this.glass.getName();
+        }
+
+        return glass;
+    }
+
+    public String getYearAsString() {
+        String year = "N/A";
+
+        if (this.year != 0) {
+            year = Integer.toString(this.year);
+        }
+
+        return year;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(id);

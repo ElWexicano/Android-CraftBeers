@@ -52,17 +52,13 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_below="@+id/imageViewBeerLabel"
-                    android:layout_marginBottom="15dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
+                    android:ellipsize="end"
                     android:fontFamily="sans-serif"
                     android:lines="5"
                     android:textColor="#59000000"
                     android:textSize="13sp" />
-
-                <!--<View-->
-                <!--style="@style/HorizontalDivider"-->
-                <!--android:id="@+id/view" />-->
 
                 <TextView
                     android:id="@+id/textViewShowMore"
@@ -70,16 +66,118 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_below="@+id/textViewBeerDescription"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
                     android:background="?selectableItemBackground"
                     android:clickable="true"
                     android:gravity="center"
+                    android:padding="15dp"
                     android:text="SHOW MORE"
                     android:textColor="#909094"
                     android:textSize="13sp"
                     android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/divider1"
+                    style="@style/HorizontalDivider"
+                    android:layout_height="0.5dp"
+                    android:layout_below="@+id/textViewShowMore"
+                    android:background="#08000000" />
+
+                <TextView
+                    android:id="@+id/textViewStyle"
+                    style="@style/FillWidth"
+                    android:layout_below="@+id/textViewShowMore"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginTop="6dp"
+                    android:fontFamily="sans-serif-light"
+                    android:gravity="center_horizontal"
+                    android:lines="2"
+                    android:maxLines="3"
+                    android:textColor="#33000000"
+                    android:textSize="10sp" />
+
+                <View
+                    android:id="@+id/divider2"
+                    style="@style/HorizontalDivider"
+                    android:layout_height="0.5dp"
+                    android:layout_below="@+id/textViewStyle"
+                    android:layout_marginBottom="10dp"
+                    android:background="#08000000" />
+
+                <LinearLayout
+                    style="@style/MatchWidth"
+                    android:layout_below="@+id/divider2"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp">
+
+                    <TextView
+                        android:id="@+id/textViewAbv"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif-light"
+                        android:gravity="center"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
+                        android:textColor="#33000000"
+                        android:textSize="10sp" />
+
+                    <View
+                        style="@style/VerticalDivider"
+                        android:layout_width="0.5dp"
+                        android:background="#08000000" />
+
+                    <TextView
+                        android:id="@+id/textViewIbu"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif-light"
+                        android:gravity="center"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
+                        android:textColor="#33000000"
+                        android:textSize="10sp" />
+
+                    <View
+                        style="@style/VerticalDivider"
+                        android:layout_width="0.5dp"
+                        android:background="#08000000" />
+
+                    <TextView
+                        android:id="@+id/textViewGlass"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif-light"
+                        android:gravity="center"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
+                        android:textColor="#33000000"
+                        android:textSize="10sp" />
+
+                    <View
+                        style="@style/VerticalDivider"
+                        android:layout_width="0.5dp"
+                        android:background="#08000000" />
+
+                    <TextView
+                        android:id="@+id/textViewYear"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif-light"
+                        android:gravity="center"
+                        android:paddingBottom="5dp"
+                        android:paddingTop="5dp"
+                        android:textColor="#33000000"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
 
             </RelativeLayout>
 

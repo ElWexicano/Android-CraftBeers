@@ -81,7 +81,11 @@
         <item name="android:layout_height">1dp</item>
         <item name="android:layout_marginBottom">15dp</item>
         <item name="android:background">#0D000000</item>
-        <item name="android:layout_below">@+id/imageViewBeerLabel</item>
+    </style>
+
+    <style name="VerticalDivider" parent="FillHeight">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:background">#0D000000</item>
     </style>
 
     <style name="BeerTitle" parent="FillWidth">
@@ -113,6 +117,12 @@
         <item name="android:layout_margin">15dp</item>
         <item name="android:textColor">#cb4c53</item>
         <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="BeerValue">
+        <item name="android:textColor">#cb4c53</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
 </resources>

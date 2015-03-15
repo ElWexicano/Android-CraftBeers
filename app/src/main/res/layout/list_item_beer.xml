@@ -4,15 +4,13 @@
     style="@style/FillWidth"
     android:orientation="vertical">
 
-    <android.support.v7.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/cardView"
         style="@style/BeerCard"
         card_view:cardBackgroundColor="#ffffff"
         card_view:cardCornerRadius="1dp">
 
-        <RelativeLayout
-            style="@style/Fill">
+        <RelativeLayout style="@style/Fill">
 
             <ImageView
                 android:id="@+id/imageViewBeerLabel"
@@ -29,7 +27,8 @@
 
             <View
                 android:id="@+id/view"
-                style="@style/HorizontalDivider" />
+                style="@style/HorizontalDivider"
+                android:layout_below="@+id/imageViewBeerLabel" />
 
             <TextView
                 android:id="@+id/textViewBreweryTitle"

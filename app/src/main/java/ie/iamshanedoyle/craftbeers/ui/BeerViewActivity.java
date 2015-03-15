@@ -6,6 +6,9 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.TextAppearanceSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -100,7 +103,30 @@ public class BeerViewActivity extends ActionBarActivity {
                         }
                     });
         }
+
+        TextView textViewStyle = (TextView) findViewById(R.id.textViewStyle);
+        setAttributeText(textViewStyle, "STYLE", mBeer.getStyleAsString());
+
+        TextView textViewAbv = (TextView) findViewById(R.id.textViewAbv);
+        setAttributeText(textViewAbv, "ABV", mBeer.getAbvAsString());
+
+        TextView textViewIbu = (TextView) findViewById(R.id.textViewIbu);
+        setAttributeText(textViewIbu, "IBU", mBeer.getIbuAsString());
+
+        TextView textViewGlass = (TextView) findViewById(R.id.textViewGlass);
+        setAttributeText(textViewGlass, "GLASS", mBeer.getGlassAsString());
+
+        TextView textViewYear = (TextView) findViewById(R.id.textViewYear);
+        setAttributeText(textViewYear, "YEAR", mBeer.getYearAsString());
     }
+
+    private void setAttributeText(TextView textView, String label, String value) {
+        SpannableString spannableString = new SpannableString(label + "\n" + value);
+        spannableString.setSpan(new TextAppearanceSpan(this, R.style.BeerValue), label.length(),
+                spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textView.setText(spannableString);
+    }
+
 
     /**
      * Initialises the brewery UI.
@@ -175,5 +201,9 @@ public class BeerViewActivity extends ActionBarActivity {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.about_dialog);
         dialog.show();
+    }
+
+    public float pxFromDp(final float dp) {
+        return dp * getResources().getDisplayMetrics().density;
     }
 }

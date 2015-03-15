@@ -1,5 +1,6 @@
 package ie.iamshanedoyle.craftbeers.ui;
 
+import android.animation.ObjectAnimator;
 import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -11,6 +12,7 @@ import android.text.SpannableString;
 import android.text.style.TextAppearanceSpan;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,6 +35,7 @@ public class BeerViewActivity extends ActionBarActivity {
     private ImageView mImageViewLabel;
     private TextView mTextViewTitle;
     private ActionBar mActionBar;
+    private boolean mIsShowingMore = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,9 +90,25 @@ public class BeerViewActivity extends ActionBarActivity {
 
         TextView textViewDescription = (TextView) findViewById(R.id.textViewBeerDescription);
 
-        if (textViewDescription != null) {
-            textViewDescription.setText(mBeer.getDescription());
+        String description = mBeer.getDescription();
+
+        if (description == null) {
+            description = "Description Unavailable.";
         }
+
+        textViewDescription.setText(description);
+        TextView textViewShowMore = (TextView) findViewById(R.id.textViewShowMore);
+
+        textViewShowMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mIsShowingMore) {
+                    hideMoreDescription();
+                } else {
+                    showMoreDescription();
+                }
+            }
+        });
 
         mImageViewLabel = (ImageView) findViewById(R.id.imageViewBeerLabel);
 
@@ -119,14 +138,6 @@ public class BeerViewActivity extends ActionBarActivity {
         TextView textViewYear = (TextView) findViewById(R.id.textViewYear);
         setAttributeText(textViewYear, "YEAR", mBeer.getYearAsString());
     }
-
-    private void setAttributeText(TextView textView, String label, String value) {
-        SpannableString spannableString = new SpannableString(label + "\n" + value);
-        spannableString.setSpan(new TextAppearanceSpan(this, R.style.BeerValue), label.length(),
-                spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        textView.setText(spannableString);
-    }
-
 
     /**
      * Initialises the brewery UI.
@@ -166,6 +177,13 @@ public class BeerViewActivity extends ActionBarActivity {
         }
     }
 
+    private void setAttributeText(TextView textView, String label, String value) {
+        SpannableString spannableString = new SpannableString(label + "\n" + value);
+        spannableString.setSpan(new TextAppearanceSpan(this, R.style.BeerValue), label.length(),
+                spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textView.setText(spannableString);
+    }
+
     /**
      * Gets the color from the image to use as the action bar color.
      */
@@ -194,6 +212,42 @@ public class BeerViewActivity extends ActionBarActivity {
     }
 
     /**
+     * Shows more of the description.
+     */
+    private void showMoreDescription() {
+        TextView textViewDescription = (TextView) findViewById(R.id.textViewBeerDescription);
+        TextView textViewShowMore = (TextView) findViewById(R.id.textViewShowMore);
+
+        textViewShowMore.setText("SHOW LESS");
+        mIsShowingMore = true;
+
+        ObjectAnimator animation = ObjectAnimator.ofInt(
+                textViewDescription,
+                "maxLines",
+                100);
+        animation.setDuration(500);
+        animation.start();
+    }
+
+    /**
+     * Hides more of the description.
+     */
+    private void hideMoreDescription() {
+        TextView textViewDescription = (TextView) findViewById(R.id.textViewBeerDescription);
+        TextView textViewShowMore = (TextView) findViewById(R.id.textViewShowMore);
+
+        textViewShowMore.setText("SHOW MORE");
+        mIsShowingMore = false;
+
+        ObjectAnimator animation = ObjectAnimator.ofInt(
+                textViewDescription,
+                "maxLines",
+                5);
+        animation.setDuration(500);
+        animation.start();
+    }
+
+    /**
      * Show the about dialog.
      */
     private void showAboutDialog() {
@@ -201,9 +255,5 @@ public class BeerViewActivity extends ActionBarActivity {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.about_dialog);
         dialog.show();
-    }
-
-    public float pxFromDp(final float dp) {
-        return dp * getResources().getDisplayMetrics().density;
     }
 }

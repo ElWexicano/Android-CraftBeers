@@ -12,12 +12,6 @@
     <string name="transition_description">transition_description</string>
     <string name="transition_card">transition_card</string>
     <string name="brewed_by">Brewed by &lt;b>%1$s&lt;/b> %2$s</string>
-
-    <string name="exmaple_beer">"Admiral" Stache</string>
-    <string name="exmaple_beer_style">Baltic-Style Porter</string>
-    <string name="exmaple_brewery">Milwaukee Brewing Company</string>
-    <string name="exmaple_brewery_website">http://mkbrewing.com/</string>
-    <string name="exmaple_brewery_description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
     <string name="show_less">SHOW LESS</string>
     <string name="show_more">SHOW MORE</string>
     <string name="style">STYLE</string>
@@ -30,5 +24,4 @@
     <string name="no_brewery">No Brewery Info Available</string>
     <string name="the_beer">THE BEER</string>
     <string name="the_brewery">THE BREWERY</string>
-
 </resources>

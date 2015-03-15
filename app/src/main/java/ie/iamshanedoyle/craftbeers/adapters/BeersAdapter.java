@@ -46,7 +46,8 @@ public class BeersAdapter extends RecyclerView.Adapter<BeersAdapter.ViewHolder> 
         viewHolder.textViewTitle.setText(beer.getName());
 
         if (beer.getDescription() == null || beer.getDescription().isEmpty()) {
-            viewHolder.textViewDescription.setText("Description unavailable.");
+            viewHolder.textViewDescription.setText(
+                    mContextReference.get().getString(R.string.description_unavailable));
         } else {
             viewHolder.textViewDescription.setText(beer.getDescription());
         }
@@ -64,7 +65,8 @@ public class BeersAdapter extends RecyclerView.Adapter<BeersAdapter.ViewHolder> 
             CharSequence styledText = Html.fromHtml(brewedBy);
             viewHolder.textViewBreweryTitle.setText(styledText);
         } else {
-            viewHolder.textViewBreweryTitle.setText("No Brewery Info Available");
+            viewHolder.textViewBreweryTitle.setText(
+                    mContextReference.get().getString(R.string.no_brewery));
         }
 
         if (beer.hasLabel()) {

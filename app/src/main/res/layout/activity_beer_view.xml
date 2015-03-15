@@ -13,7 +13,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:fontFamily="sans-serif-light"
-            android:text="THE BEER"
+            android:text="@string/the_beer"
             android:textColor="#33000000"
             android:textSize="12sp" />
 
@@ -70,7 +70,7 @@
                     android:clickable="true"
                     android:gravity="center"
                     android:padding="15dp"
-                    android:text="SHOW MORE"
+                    android:text="@string/show_more"
                     android:textColor="#909094"
                     android:textSize="13sp"
                     android:textStyle="bold" />
@@ -188,7 +188,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:fontFamily="sans-serif-light"
-            android:text="THE BREWERY"
+            android:text="@string/the_brewery"
             android:textColor="#33000000"
             android:textSize="12sp" />
 

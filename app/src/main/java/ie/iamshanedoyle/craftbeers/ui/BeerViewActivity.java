@@ -57,7 +57,7 @@ public class BeerViewActivity extends ActionBarActivity {
         initBreweryUI();
 
         mActionBar = getSupportActionBar();
-        getSupportActionBar().setTitle(mBeer.getName() + " Beer");
+        getSupportActionBar().setTitle(mBeer.getName() + " " + getString(R.string.beer));
     }
 
     @Override
@@ -93,7 +93,7 @@ public class BeerViewActivity extends ActionBarActivity {
         String description = mBeer.getDescription();
 
         if (description == null) {
-            description = "Description Unavailable.";
+            description = getString(R.string.description_unavailable);
         }
 
         textViewDescription.setText(description);
@@ -124,19 +124,19 @@ public class BeerViewActivity extends ActionBarActivity {
         }
 
         TextView textViewStyle = (TextView) findViewById(R.id.textViewStyle);
-        setAttributeText(textViewStyle, "STYLE", mBeer.getStyleAsString());
+        setAttributeText(textViewStyle, getString(R.string.style), mBeer.getStyleAsString());
 
         TextView textViewAbv = (TextView) findViewById(R.id.textViewAbv);
-        setAttributeText(textViewAbv, "ABV", mBeer.getAbvAsString());
+        setAttributeText(textViewAbv, getString(R.string.abv), mBeer.getAbvAsString());
 
         TextView textViewIbu = (TextView) findViewById(R.id.textViewIbu);
-        setAttributeText(textViewIbu, "IBU", mBeer.getIbuAsString());
+        setAttributeText(textViewIbu, getString(R.string.ibu), mBeer.getIbuAsString());
 
         TextView textViewGlass = (TextView) findViewById(R.id.textViewGlass);
-        setAttributeText(textViewGlass, "GLASS", mBeer.getGlassAsString());
+        setAttributeText(textViewGlass, getString(R.string.glass), mBeer.getGlassAsString());
 
         TextView textViewYear = (TextView) findViewById(R.id.textViewYear);
-        setAttributeText(textViewYear, "YEAR", mBeer.getYearAsString());
+        setAttributeText(textViewYear, getString(R.string.year), mBeer.getYearAsString());
     }
 
     /**
@@ -218,7 +218,7 @@ public class BeerViewActivity extends ActionBarActivity {
         TextView textViewDescription = (TextView) findViewById(R.id.textViewBeerDescription);
         TextView textViewShowMore = (TextView) findViewById(R.id.textViewShowMore);
 
-        textViewShowMore.setText("SHOW LESS");
+        textViewShowMore.setText(getString(R.string.show_less));
         mIsShowingMore = true;
 
         ObjectAnimator animation = ObjectAnimator.ofInt(
@@ -236,7 +236,7 @@ public class BeerViewActivity extends ActionBarActivity {
         TextView textViewDescription = (TextView) findViewById(R.id.textViewBeerDescription);
         TextView textViewShowMore = (TextView) findViewById(R.id.textViewShowMore);
 
-        textViewShowMore.setText("SHOW MORE");
+        textViewShowMore.setText(getString(R.string.show_more));
         mIsShowingMore = false;
 
         ObjectAnimator animation = ObjectAnimator.ofInt(

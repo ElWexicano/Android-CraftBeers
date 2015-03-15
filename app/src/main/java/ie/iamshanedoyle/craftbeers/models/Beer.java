@@ -23,6 +23,7 @@ public class Beer implements Parcelable {
             return new Beer[size];
         }
     };
+
     private String id;
     private String name;
     private String description;
@@ -155,9 +156,9 @@ public class Beer implements Parcelable {
         ibu = parcel.readString();
         year = parcel.readInt();
         parcel.readList(breweries, Brewery.class.getClassLoader());
-        glass = parcel.readParcelable(Images.class.getClassLoader());
+        glass = parcel.readParcelable(Glass.class.getClassLoader());
         labels = parcel.readParcelable(Images.class.getClassLoader());
-        style = parcel.readParcelable(Images.class.getClassLoader());
+        style = parcel.readParcelable(Style.class.getClassLoader());
     }
 
     @Override

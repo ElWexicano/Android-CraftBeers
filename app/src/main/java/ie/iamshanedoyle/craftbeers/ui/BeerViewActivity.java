@@ -3,17 +3,9 @@ package ie.iamshanedoyle.craftbeers.ui;
 import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.support.v7.graphics.Palette;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.AbsoluteSizeSpan;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.RelativeSizeSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -99,7 +91,8 @@ public class BeerViewActivity extends ActionBarActivity {
         mImageViewLabel = (ImageView) findViewById(R.id.imageViewBeerLabel);
 
         if (mImageViewLabel != null && mBeer.hasLabel()) {
-            Picasso.with(this).load(mBeer.getLabels().getIcon()).into(mImageViewLabel,
+            Picasso.with(this).load(mBeer.getLabels().getMedium())
+                    .placeholder(R.drawable.beer_placeholder).into(mImageViewLabel,
                     new Callback.EmptyCallback() {
                         @Override
                         public void onSuccess() {
@@ -122,23 +115,13 @@ public class BeerViewActivity extends ActionBarActivity {
         TextView textViewBreweryTitle = (TextView) findViewById(R.id.textViewBreweryTitle);
 
         if (textViewBreweryTitle != null && brewery.getName() != null) {
+            textViewBreweryTitle.setText(brewery.getName());
+        }
 
-            SpannableString spannableString = new SpannableString(brewery.getName());
+        TextView textViewBreweryWebsite = (TextView) findViewById(R.id.textViewBreweryWebsite);
 
-            if (brewery.getEstablished() != null) {
-                int size = spannableString.length();
-
-                spannableString = new SpannableString(brewery.getName()
-                        + "\nEstablished in " + brewery.getEstablished());
-
-                spannableString.setSpan(new ForegroundColorSpan(
-                        getResources().getColor(R.color.brewery_grey)), size,
-                        spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                spannableString.setSpan(new RelativeSizeSpan(0.8f), size,
-                        spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }
-
-            textViewBreweryTitle.setText(spannableString);
+        if (textViewBreweryWebsite != null && brewery.getWebsite() != null) {
+            textViewBreweryWebsite.setText(brewery.getWebsite());
         }
 
         TextView textViewBreweryDescription = (TextView)
@@ -149,10 +132,11 @@ public class BeerViewActivity extends ActionBarActivity {
 
         }
 
-        ImageView imageViewBreweryImage = (ImageView) findViewById(R.id.imageViewBrewery);
+        ImageView imageViewBreweryImage = (ImageView) findViewById(R.id.imageViewBreweryLabel);
 
         if (imageViewBreweryImage != null && brewery.hasImage()) {
-            Picasso.with(this).load(brewery.getImage()).into(imageViewBreweryImage);
+            Picasso.with(this).load(brewery.getImage())
+                    .placeholder(R.drawable.brewery_placeholder).into(imageViewBreweryImage);
         }
     }
 
@@ -162,25 +146,25 @@ public class BeerViewActivity extends ActionBarActivity {
     private void getColorFromImage() {
         Bitmap bitmap = ((BitmapDrawable) mImageViewLabel.getDrawable()).getBitmap();
 
-        Palette.generateAsync(bitmap, new Palette.PaletteAsyncListener() {
-            @Override
-            public void onGenerated(Palette palette) {
-
-                Palette.Swatch swatch = palette.getVibrantSwatch();
-                Palette.Swatch swatchDark = palette.getDarkVibrantSwatch();
-
-                if (swatch != null) {
-                    mActionBar.setBackgroundDrawable(new ColorDrawable(swatch.getRgb()));
-                    mTextViewTitle.setTextColor(swatch.getTitleTextColor());
-                }
-
-                if (swatchDark != null) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        getWindow().setStatusBarColor(swatchDark.getRgb());
-                    }
-                }
-            }
-        });
+//        Palette.generateAsync(bitmap, new Palette.PaletteAsyncListener() {
+//            @Override
+//            public void onGenerated(Palette palette) {
+//
+//                Palette.Swatch swatch = palette.getVibrantSwatch();
+//                Palette.Swatch swatchDark = palette.getDarkVibrantSwatch();
+//
+//                if (swatch != null) {
+//                    mActionBar.setBackgroundDrawable(new ColorDrawable(swatch.getRgb()));
+//                    mTextViewTitle.setTextColor(swatch.getTitleTextColor());
+//                }
+//
+//                if (swatchDark != null) {
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                        getWindow().setStatusBarColor(swatchDark.getRgb());
+//                    }
+//                }
+//            }
+//        });
     }
 
     /**

@@ -8,7 +8,17 @@ import android.os.Parcelable;
  *
  * @author Shane Doyle <@ElWexicano>
  */
-class Glass implements Parcelable {
+public class Glass implements Parcelable {
+    public static final Parcelable.Creator<Glass> CREATOR
+            = new Parcelable.Creator<Glass>() {
+        public Glass createFromParcel(Parcel in) {
+            return new Glass(in);
+        }
+
+        public Glass[] newArray(int size) {
+            return new Glass[size];
+        }
+    };
     private String name;
 
     public Glass() {

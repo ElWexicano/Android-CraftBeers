@@ -70,10 +70,10 @@ public class BeersAdapter extends RecyclerView.Adapter<BeersAdapter.ViewHolder> 
         if (beer.hasLabel()) {
             Picasso.with(mContextReference.get())
                     .load(beer.getLabels().getMedium())
-                    .placeholder(R.drawable.placeholder)
+                    .placeholder(R.drawable.beer_placeholder)
                     .into(viewHolder.imageViewLabel);
         } else {
-            viewHolder.imageViewLabel.setImageResource(R.drawable.placeholder);
+            viewHolder.imageViewLabel.setImageResource(R.drawable.beer_placeholder);
         }
     }
 

@@ -8,7 +8,17 @@ import android.os.Parcelable;
  *
  * @author Shane Doyle <@ElWexicano>
  */
-class Style implements Parcelable {
+public class Style implements Parcelable {
+    public static final Parcelable.Creator<Style> CREATOR
+            = new Parcelable.Creator<Style>() {
+        public Style createFromParcel(Parcel in) {
+            return new Style(in);
+        }
+
+        public Style[] newArray(int size) {
+            return new Style[size];
+        }
+    };
     private String name;
     private String description;
 

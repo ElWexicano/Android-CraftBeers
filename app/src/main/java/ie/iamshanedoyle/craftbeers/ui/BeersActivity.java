@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -15,29 +14,22 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
 
-import com.crashlytics.android.Crashlytics;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import de.greenrobot.event.EventBus;
-import ie.iamshanedoyle.craftbeers.CraftBeersApplication;
 import ie.iamshanedoyle.craftbeers.R;
 import ie.iamshanedoyle.craftbeers.adapters.BeersAdapter;
 import ie.iamshanedoyle.craftbeers.adapters.RecyclerItemClickListener;
 import ie.iamshanedoyle.craftbeers.events.GetBeersEvent;
 import ie.iamshanedoyle.craftbeers.models.Beer;
 import ie.iamshanedoyle.craftbeers.services.BeersService;
-import io.fabric.sdk.android.Fabric;
 
 /**
  * This activity is used for displaying a list of beers.
  *
  * @author Shane Doyle <@ElWexicano>
  */
-public class BeersActivity extends ActionBarActivity {
+public class BeersActivity extends BaseActivity {
 
     /**
      * Constants.
@@ -70,13 +62,6 @@ public class BeersActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beers);
-
-        Fabric.with(this, new Crashlytics());
-
-        // Google Analytics Screen Tagging.
-        Tracker t = ((CraftBeersApplication) getApplication()).getTracker();
-        t.setScreenName(SCREEN_NAME);
-        t.send(new HitBuilders.ScreenViewBuilder().build());
 
         String action = getIntent().getAction();
         if (action.equals(Intent.ACTION_SEARCH) ||
@@ -143,18 +128,9 @@ public class BeersActivity extends ActionBarActivity {
     protected void onResume() {
         super.onResume();
 
-        EventBus.getDefault().register(this);
-
         if (mBeers.size() == 0) {
             search();
         }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -223,6 +199,11 @@ public class BeersActivity extends ActionBarActivity {
         }
 
         return true;
+    }
+
+    @Override
+    protected String getScreenName() {
+        return SCREEN_NAME;
     }
 
     /**

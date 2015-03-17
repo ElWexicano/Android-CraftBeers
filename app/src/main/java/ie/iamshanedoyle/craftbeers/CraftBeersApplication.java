@@ -2,8 +2,11 @@ package ie.iamshanedoyle.craftbeers;
 
 import android.app.Application;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
+
+import io.fabric.sdk.android.Fabric;
 
 /**
  * Extends the Application.
@@ -21,12 +24,21 @@ public class CraftBeersApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        analyticsInstance = GoogleAnalytics.getInstance(this);
-        tracker = analyticsInstance.newTracker(APP_ID);
-        tracker.enableAdvertisingIdCollection(true);
+        startCrashlytics();
+        startGoogleAnalytics();
     }
 
     public Tracker getTracker() {
         return tracker;
+    }
+
+    private void startCrashlytics() {
+        Fabric.with(this, new Crashlytics());
+    }
+
+    private void startGoogleAnalytics() {
+        analyticsInstance = GoogleAnalytics.getInstance(this);
+        tracker = analyticsInstance.newTracker(APP_ID);
+        tracker.enableAdvertisingIdCollection(true);
     }
 }

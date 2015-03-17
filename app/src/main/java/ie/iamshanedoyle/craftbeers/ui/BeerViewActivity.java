@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.TextAppearanceSpan;
@@ -29,8 +28,9 @@ import ie.iamshanedoyle.craftbeers.models.Brewery;
  *
  * @author Shane Doyle <@ElWexicano>
  */
-public class BeerViewActivity extends ActionBarActivity {
+public class BeerViewActivity extends BaseActivity {
 
+    private static final String SCREEN_NAME = "BeerViewScreen";
     private Beer mBeer;
     private ImageView mImageViewLabel;
     private TextView mTextViewTitle;
@@ -39,7 +39,9 @@ public class BeerViewActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_beer_view);
 
         if (getIntent() != null) {
@@ -76,6 +78,11 @@ public class BeerViewActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected String getScreenName() {
+        return SCREEN_NAME;
     }
 
     /**

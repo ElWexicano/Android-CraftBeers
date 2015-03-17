@@ -1,7 +1,6 @@
 package ie.iamshanedoyle.craftbeers.ui;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.Toast;
 
@@ -20,8 +19,8 @@ import ie.iamshanedoyle.craftbeers.events.NetworkStateChangedEvent;
 public abstract class BaseActivity extends ActionBarActivity {
 
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         trackScreen();
     }

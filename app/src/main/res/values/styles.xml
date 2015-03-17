@@ -114,9 +114,13 @@
 
     <style name="BrewedBy" parent="FillWidth">
         <item name="android:layout_alignTop">@+id/view</item>
-        <item name="android:layout_margin">15dp</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:layout_marginRight">15dp</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:paddingBottom">15dp</item>
         <item name="android:textColor">#cb4c53</item>
         <item name="android:textSize">11sp</item>
+        <item name="android:maxLines">2</item>
     </style>
 
     <style name="BeerValue">

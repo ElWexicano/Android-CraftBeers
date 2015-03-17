@@ -86,12 +86,12 @@
                     android:id="@+id/textViewStyle"
                     style="@style/FillWidth"
                     android:layout_below="@+id/textViewShowMore"
-                    android:layout_marginBottom="12dp"
                     android:layout_marginTop="6dp"
                     android:fontFamily="sans-serif-light"
                     android:gravity="center_horizontal"
                     android:lines="2"
                     android:maxLines="3"
+                    android:paddingBottom="12dp"
                     android:textColor="#33000000"
                     android:textSize="10sp" />
 
@@ -106,11 +106,11 @@
                 <LinearLayout
                     style="@style/MatchWidth"
                     android:layout_below="@+id/divider2"
-                    android:layout_marginBottom="15dp"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp">
+                    android:layout_marginRight="15dp"
+                    android:paddingBottom="15dp">
 
-                    <TextView
+                <TextView
                         android:id="@+id/textViewAbv"
                         android:layout_width="0dip"
                         android:layout_height="wrap_content"
@@ -238,8 +238,8 @@
                     android:layout_alignRight="@+id/textViewBreweryWebsite"
                     android:layout_alignStart="@+id/imageViewBreweryLabel"
                     android:layout_below="@+id/textViewBreweryWebsite"
-                    android:layout_marginBottom="15dp"
                     android:layout_marginTop="15dp"
+                    android:paddingBottom="15dp"
                     android:textColor="#66000000"
                     android:textSize="12sp" />
 

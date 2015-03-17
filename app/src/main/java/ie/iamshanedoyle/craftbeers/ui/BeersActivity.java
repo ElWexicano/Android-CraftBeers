@@ -63,9 +63,10 @@ public class BeersActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beers);
 
-        String action = getIntent().getAction();
-        if (action.equals(Intent.ACTION_SEARCH) ||
-                action.equals(GMS_SEARCH_ACTION)) {
+        String action = getIntent() != null ? getIntent().getAction() : null;
+
+        if (action != null && (action.equals(Intent.ACTION_SEARCH) ||
+                action.equals(GMS_SEARCH_ACTION))) {
             mBeerKeywords = getIntent().getStringExtra(SearchManager.QUERY);
         }
 

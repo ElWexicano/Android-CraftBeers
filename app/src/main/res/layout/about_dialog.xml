@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     style="@style/Fill"
-    android:minWidth="300dp"
     android:minHeight="200dp"
+    android:minWidth="300dp"
+    android:orientation="vertical"
     android:padding="10dp"
     android:paddingBottom="20dp">
 
     <ImageView
+        android:id="@+id/imageViewAppIcon"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:id="@+id/imageViewAppIcon"
-        android:src="@drawable/ic_launcher"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/ic_launcher" />
 
     <TextView
-        style="@style/FillWidth"
-        android:text="@string/developed_by"
         android:id="@+id/textViewDeveloperBy"
-        android:textColor="#ae000000"
-        android:textSize="16sp"
-        android:fontFamily="sans-serif-light"
+        style="@style/FillWidth"
         android:layout_gravity="center_horizontal"
+        android:fontFamily="sans-serif-light"
         android:gravity="center"
-        android:padding="10dp"/>
+        android:padding="10dp"
+        android:text="@string/developed_by"
+        android:textColor="#ae000000"
+        android:textSize="16sp" />
 
     <TextView
-        style="@style/FillWidth"
-        android:text="@string/version"
         android:id="@+id/textViewVersion"
-        android:textColor="#ae000000"
-        android:textSize="16sp"
-        android:fontFamily="sans-serif-condensed"
+        style="@style/FillWidth"
         android:layout_gravity="center_horizontal"
+        android:fontFamily="sans-serif-condensed"
         android:gravity="center"
-        android:paddingBottom="10dp"/>
+        android:paddingBottom="10dp"
+        android:text="@string/placeholder_version"
+        android:textColor="#ae000000"
+        android:textSize="16sp" />
 
 </LinearLayout>

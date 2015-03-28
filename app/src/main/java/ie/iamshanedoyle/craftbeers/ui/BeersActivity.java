@@ -9,6 +9,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -61,6 +62,7 @@ public class BeersActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_beers);
 
         String action = getIntent() != null ? getIntent().getAction() : null;
@@ -69,6 +71,10 @@ public class BeersActivity extends BaseActivity {
                 action.equals(GMS_SEARCH_ACTION))) {
             mBeerKeywords = getIntent().getStringExtra(SearchManager.QUERY);
         }
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setElevation(10);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mLayoutManager = new LinearLayoutManager(this);
@@ -139,7 +145,7 @@ public class BeersActivity extends BaseActivity {
         super.onSaveInstanceState(outState);
 
         if (mBeers != null) {
-            outState.putParcelableArrayList(EXTRA_BEERS, new ArrayList<> (mBeers));
+            outState.putParcelableArrayList(EXTRA_BEERS, new ArrayList<>(mBeers));
         }
 
         outState.putString(EXTRA_KEYWORDS, mBeerKeywords);

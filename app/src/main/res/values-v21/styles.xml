@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <style name="BaseAppTheme" parent="android:Theme.Material.Light">
-        <item name="android:windowContentTransitions">true</item>
-        <!--<item name="android:windowEnterTransition">@transition/fade</item>-->
-        <!--<item name="android:windowExitTransition">@transition/fade</item>-->
-    </style>
-</resources>

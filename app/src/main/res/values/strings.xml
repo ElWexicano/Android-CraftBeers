@@ -7,7 +7,6 @@
     <string name="search_hint">Search Beers</string>
     <string name="search">Search</string>
     <string name="developed_by">Developed by @ElWexicano</string>
-    <string name="version">Version 1.0.0</string>
     <string name="transition_title">transition_title</string>
     <string name="transition_description">transition_description</string>
     <string name="transition_card">transition_card</string>
@@ -23,5 +22,7 @@
     <string name="beer">Beer</string>
     <string name="no_brewery">No Brewery Info Available</string>
     <string name="the_beer">THE BEER</string>
-    <string name="the_brewery">THE BREWERY</string>
+    <string name="the_brewery">THE BREWER</string>
+    <string name="no_beers_found">No Beers Found</string>
+    <string name="no_beers_found_message">Awh suds, we can\'t find any beers!</string>
 </resources>

@@ -1,252 +1,274 @@
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/ActivityBase"
+    android:background="@null"
     tools:context=".ui.BeerViewActivity">
 
-    <LinearLayout
-        style="@style/Fill"
-        android:orientation="vertical">
+    <ie.iamshanedoyle.craftbeers.ui.widgets.ObservableScrollView
+        android:id="@+id/scrollview"
+        style="@style/Match"
+        android:clipToPadding="false"
+        android:fillViewport="true">
 
-        <TextView
-            style="@style/FillWidth"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:fontFamily="sans-serif-light"
-            android:text="@string/the_beer"
-            android:textColor="#33000000"
-            android:textSize="12sp" />
+        <RelativeLayout
+            style="@style/MatchWidth"
+            android:paddingBottom="20dp">
 
-        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/cardViewBeer"
-            style="@style/BeerCard"
-            android:layout_gravity="start"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="2dp"
-            android:clickable="false"
-            card_view:cardBackgroundColor="#ffffff"
-            card_view:cardCornerRadius="1dp">
+            <ImageView
+                android:id="@+id/header"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/header"
+                android:tint="#8c000000"
+                android:tintMode="src_atop" />
 
-            <RelativeLayout style="@style/Fill">
+            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/cardViewBeer"
+                style="@style/BeerCard"
+                android:layout_gravity="start"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="180dp"
+                android:clickable="false"
+                card_view:cardBackgroundColor="#ffffff"
+                card_view:cardCornerRadius="1dp">
 
-                <ImageView
-                    android:id="@+id/imageViewBeerLabel"
-                    style="@style/BeerLabel" />
+                <RelativeLayout style="@style/Fill">
 
-                <TextView
-                    android:id="@+id/textViewBeerTitle"
-                    style="@style/FillWidth"
-                    android:layout_alignBottom="@+id/imageViewBeerLabel"
-                    android:layout_alignTop="@+id/imageViewBeerLabel"
-                    android:layout_marginRight="15dp"
-                    android:layout_toEndOf="@+id/imageViewBeerLabel"
-                    android:layout_toRightOf="@+id/imageViewBeerLabel"
-                    android:fontFamily="sans-serif-light"
-                    android:gravity="center_vertical"
-                    android:textColor="#646464"
-                    android:textSize="20sp" />
+                    <ImageView
+                        android:id="@+id/imageViewBeerLabel"
+                        style="@style/BeerLabel" />
 
-                <TextView
-                    android:id="@+id/textViewBeerDescription"
-                    style="@style/FillWidth"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/imageViewBeerLabel"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:ellipsize="end"
-                    android:fontFamily="sans-serif"
-                    android:maxLines="5"
-                    android:textColor="#59000000"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:id="@+id/textViewShowMore"
-                    style="@style/FillWidth"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/textViewBeerDescription"
-                    android:background="?selectableItemBackground"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:padding="15dp"
-                    android:text="@string/show_more"
-                    android:textColor="#909094"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
-
-                <View
-                    android:id="@+id/divider1"
-                    style="@style/HorizontalDivider"
-                    android:layout_height="0.5dp"
-                    android:layout_below="@+id/textViewShowMore"
-                    android:background="#08000000" />
-
-                <TextView
-                    android:id="@+id/textViewStyle"
-                    style="@style/FillWidth"
-                    android:layout_below="@+id/textViewShowMore"
-                    android:layout_marginTop="6dp"
-                    android:fontFamily="sans-serif-light"
-                    android:gravity="center_horizontal"
-                    android:lines="2"
-                    android:maxLines="3"
-                    android:paddingBottom="12dp"
-                    android:textColor="#33000000"
-                    android:textSize="10sp" />
-
-                <View
-                    android:id="@+id/divider2"
-                    style="@style/HorizontalDivider"
-                    android:layout_height="0.5dp"
-                    android:layout_below="@+id/textViewStyle"
-                    android:layout_marginBottom="10dp"
-                    android:background="#08000000" />
-
-                <LinearLayout
-                    style="@style/MatchWidth"
-                    android:layout_below="@+id/divider2"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:paddingBottom="15dp">
-
-                <TextView
-                        android:id="@+id/textViewAbv"
-                        android:layout_width="0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
+                    <TextView
+                        android:id="@+id/textViewBeerTitle"
+                        style="@style/FillWidth"
+                        android:layout_alignBottom="@+id/imageViewBeerLabel"
+                        android:layout_alignTop="@+id/imageViewBeerLabel"
+                        android:layout_marginRight="15dp"
+                        android:layout_toEndOf="@+id/imageViewBeerLabel"
+                        android:layout_toRightOf="@+id/imageViewBeerLabel"
                         android:fontFamily="sans-serif-light"
+                        android:gravity="center_vertical"
+                        android:textColor="#646464"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/textViewBeerDescription"
+                        style="@style/FillWidth"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/imageViewBeerLabel"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:ellipsize="end"
+                        android:fontFamily="sans-serif"
+                        android:textColor="#59000000"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/textViewShowMore"
+                        style="@style/FillWidth"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/textViewBeerDescription"
+                        android:background="?selectableItemBackground"
+                        android:clickable="true"
                         android:gravity="center"
-                        android:paddingBottom="5dp"
-                        android:paddingTop="5dp"
+                        android:padding="15dp"
+                        android:text="@string/show_more"
+                        android:textColor="#909094"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:visibility="invisible" />
+
+                    <View
+                        android:id="@+id/divider1"
+                        style="@style/HorizontalDivider"
+                        android:layout_height="0.5dp"
+                        android:layout_below="@+id/textViewShowMore"
+                        android:background="#08000000" />
+
+                    <TextView
+                        android:id="@+id/textViewStyle"
+                        style="@style/FillWidth"
+                        android:layout_below="@+id/textViewShowMore"
+                        android:layout_marginTop="6dp"
+                        android:fontFamily="sans-serif-light"
+                        android:gravity="center_horizontal"
+                        android:lines="2"
+                        android:maxLines="3"
+                        android:paddingBottom="12dp"
                         android:textColor="#33000000"
                         android:textSize="10sp" />
 
                     <View
-                        style="@style/VerticalDivider"
-                        android:layout_width="0.5dp"
+                        android:id="@+id/divider2"
+                        style="@style/HorizontalDivider"
+                        android:layout_height="0.5dp"
+                        android:layout_below="@+id/textViewStyle"
+                        android:layout_marginBottom="10dp"
                         android:background="#08000000" />
 
+                    <LinearLayout
+                        style="@style/MatchWidth"
+                        android:layout_below="@+id/divider2"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:paddingBottom="15dp">
+
+                        <TextView
+                            android:id="@+id/textViewAbv"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-light"
+                            android:gravity="center"
+                            android:paddingBottom="5dp"
+                            android:paddingTop="5dp"
+                            android:textColor="#33000000"
+                            android:textSize="10sp" />
+
+                        <View
+                            style="@style/VerticalDivider"
+                            android:layout_width="0.5dp"
+                            android:background="#08000000" />
+
+                        <TextView
+                            android:id="@+id/textViewIbu"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-light"
+                            android:gravity="center"
+                            android:paddingBottom="5dp"
+                            android:paddingTop="5dp"
+                            android:textColor="#33000000"
+                            android:textSize="10sp" />
+
+                        <View
+                            style="@style/VerticalDivider"
+                            android:layout_width="0.5dp"
+                            android:background="#08000000" />
+
+                        <TextView
+                            android:id="@+id/textViewGlass"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-light"
+                            android:gravity="center"
+                            android:paddingBottom="5dp"
+                            android:paddingTop="5dp"
+                            android:textColor="#33000000"
+                            android:textSize="10sp" />
+
+                        <View
+                            style="@style/VerticalDivider"
+                            android:layout_width="0.5dp"
+                            android:background="#08000000" />
+
+                        <TextView
+                            android:id="@+id/textViewYear"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-light"
+                            android:gravity="center"
+                            android:paddingBottom="5dp"
+                            android:paddingTop="5dp"
+                            android:textColor="#33000000"
+                            android:textSize="10sp" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:id="@+id/textViewTheBrewery"
+                style="@style/FillWidth"
+                android:layout_below="@+id/cardViewBeer"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/the_brewery"
+                android:textColor="#33000000"
+                android:textSize="12sp" />
+
+            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/cardViewBrewery"
+                style="@style/BeerCard"
+                android:layout_below="@+id/textViewTheBrewery"
+                android:layout_gravity="start"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="2dp"
+                android:clickable="false"
+                card_view:cardBackgroundColor="#ffffff"
+                card_view:cardCornerRadius="1dp">
+
+                <RelativeLayout style="@style/Fill">
+
+                    <ImageView
+                        android:id="@+id/imageViewBreweryLabel"
+                        style="@style/BreweryLabel" />
+
                     <TextView
-                        android:id="@+id/textViewIbu"
-                        android:layout_width="0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
+                        android:id="@+id/textViewBreweryTitle"
+                        style="@style/FillWidth"
+                        android:layout_alignTop="@+id/imageViewBreweryLabel"
+                        android:layout_marginRight="15dp"
+                        android:layout_toEndOf="@+id/imageViewBreweryLabel"
+                        android:layout_toRightOf="@+id/imageViewBreweryLabel"
                         android:fontFamily="sans-serif-light"
-                        android:gravity="center"
-                        android:paddingBottom="5dp"
-                        android:paddingTop="5dp"
-                        android:textColor="#33000000"
-                        android:textSize="10sp" />
-
-                    <View
-                        style="@style/VerticalDivider"
-                        android:layout_width="0.5dp"
-                        android:background="#08000000" />
+                        android:textColor="#646464"
+                        android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/textViewGlass"
-                        android:layout_width="0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:fontFamily="sans-serif-light"
-                        android:gravity="center"
-                        android:paddingBottom="5dp"
-                        android:paddingTop="5dp"
-                        android:textColor="#33000000"
-                        android:textSize="10sp" />
-
-                    <View
-                        style="@style/VerticalDivider"
-                        android:layout_width="0.5dp"
-                        android:background="#08000000" />
+                        android:id="@+id/textViewBreweryWebsite"
+                        style="@style/FillWidth"
+                        android:layout_alignLeft="@+id/textViewBreweryTitle"
+                        android:layout_alignStart="@+id/textViewBreweryTitle"
+                        android:layout_below="@+id/textViewBreweryTitle"
+                        android:layout_marginRight="15dp"
+                        android:fontFamily="sans-serif"
+                        android:textColor="#cb4c53"
+                        android:textSize="12sp" />
 
                     <TextView
-                        android:id="@+id/textViewYear"
-                        android:layout_width="0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:fontFamily="sans-serif-light"
-                        android:gravity="center"
-                        android:paddingBottom="5dp"
-                        android:paddingTop="5dp"
-                        android:textColor="#33000000"
-                        android:textSize="10sp" />
+                        android:id="@+id/textViewBreweryDescription"
+                        style="@style/FillWidth"
+                        android:layout_alignEnd="@+id/textViewBreweryWebsite"
+                        android:layout_alignLeft="@+id/imageViewBreweryLabel"
+                        android:layout_alignRight="@+id/textViewBreweryWebsite"
+                        android:layout_alignStart="@+id/imageViewBreweryLabel"
+                        android:layout_below="@+id/textViewBreweryWebsite"
+                        android:layout_marginTop="15dp"
+                        android:paddingBottom="15dp"
+                        android:textColor="#66000000"
+                        android:textSize="12sp" />
 
-                </LinearLayout>
+                </RelativeLayout>
 
-            </RelativeLayout>
+            </android.support.v7.widget.CardView>
 
-        </android.support.v7.widget.CardView>
+        </RelativeLayout>
 
-        <TextView
-            style="@style/FillWidth"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:fontFamily="sans-serif-light"
-            android:text="@string/the_brewery"
-            android:textColor="#33000000"
-            android:textSize="12sp" />
+    </ie.iamshanedoyle.craftbeers.ui.widgets.ObservableScrollView>
 
-        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/cardViewBrewery"
-            style="@style/BeerCard"
-            android:layout_gravity="start"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="2dp"
-            android:clickable="false"
-            card_view:cardBackgroundColor="#ffffff"
-            card_view:cardCornerRadius="1dp">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/MatchWidth"
+        android:layout_gravity="top"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-            <RelativeLayout style="@style/Fill">
-
-                <ImageView
-                    android:id="@+id/imageViewBreweryLabel"
-                    style="@style/BreweryLabel" />
-
-                <TextView
-                    android:id="@+id/textViewBreweryTitle"
-                    style="@style/FillWidth"
-                    android:layout_alignTop="@+id/imageViewBreweryLabel"
-                    android:layout_marginRight="15dp"
-                    android:layout_toEndOf="@+id/imageViewBreweryLabel"
-                    android:layout_toRightOf="@+id/imageViewBreweryLabel"
-                    android:fontFamily="sans-serif-light"
-                    android:textColor="#646464"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/textViewBreweryWebsite"
-                    style="@style/FillWidth"
-                    android:layout_alignLeft="@+id/textViewBreweryTitle"
-                    android:layout_alignStart="@+id/textViewBreweryTitle"
-                    android:layout_below="@+id/textViewBreweryTitle"
-                    android:layout_marginRight="15dp"
-                    android:fontFamily="sans-serif"
-                    android:textColor="#cb4c53"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/textViewBreweryDescription"
-                    style="@style/FillWidth"
-                    android:layout_alignEnd="@+id/textViewBreweryWebsite"
-                    android:layout_alignLeft="@+id/imageViewBreweryLabel"
-                    android:layout_alignRight="@+id/textViewBreweryWebsite"
-                    android:layout_alignStart="@+id/imageViewBreweryLabel"
-                    android:layout_below="@+id/textViewBreweryWebsite"
-                    android:layout_marginTop="15dp"
-                    android:paddingBottom="15dp"
-                    android:textColor="#66000000"
-                    android:textSize="12sp" />
-
-            </RelativeLayout>
-
-        </android.support.v7.widget.CardView>
-
-    </LinearLayout>
-
-</ScrollView>
+</FrameLayout>

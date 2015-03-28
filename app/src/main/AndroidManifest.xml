@@ -23,7 +23,7 @@
             android:name=".ui.BeersActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop">
-        <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -48,7 +48,8 @@
         <activity
             android:name=".ui.BeerViewActivity"
             android:label="@string/title_activity_beer_view"
-            android:parentActivityName=".ui.BeersActivity">
+            android:parentActivityName=".ui.BeersActivity"
+            android:theme="@style/AppThemeFadingActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.BeersActivity" />

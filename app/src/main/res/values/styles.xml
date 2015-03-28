@@ -68,6 +68,10 @@
         <item name="android:clickable">true</item>
     </style>
 
+    <style name="BeerViewCard" parent="BeerCard">
+
+    </style>
+
     <style name="BeerLabel">
         <item name="android:layout_height">63dp</item>
         <item name="android:layout_width">63dp</item>
@@ -128,15 +132,21 @@
         <item name="android:layout_marginRight">15dp</item>
         <item name="android:layout_marginTop">15dp</item>
         <item name="android:paddingBottom">15dp</item>
-        <item name="android:textColor">#cb4c53</item>
+        <item name="android:textColor">#d56f75</item>
         <item name="android:textSize">11sp</item>
         <item name="android:maxLines">2</item>
     </style>
 
     <style name="BeerValue">
-        <item name="android:textColor">#cb4c53</item>
+        <item name="android:textColor">#d56f75</item>
         <item name="android:textSize">18sp</item>
         <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="Beers" parent="Match">
+        <item name="android:clipChildren">true</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:scrollbars">vertical</item>
     </style>
 
 </resources>

@@ -27,7 +27,7 @@
 
             <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/cardViewBeer"
-                style="@style/BeerCard"
+                style="@style/BeerViewCard"
                 android:layout_gravity="start"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="180dp"
@@ -51,6 +51,7 @@
                         android:layout_toRightOf="@+id/imageViewBeerLabel"
                         android:fontFamily="sans-serif-light"
                         android:gravity="center_vertical"
+                        android:text="@string/placeholder_beer_title"
                         android:textColor="#646464"
                         android:textSize="20sp" />
 
@@ -64,6 +65,7 @@
                         android:layout_marginRight="15dp"
                         android:ellipsize="end"
                         android:fontFamily="sans-serif"
+                        android:text="@string/placeholder_lorem_ipsum"
                         android:textColor="#59000000"
                         android:textSize="13sp" />
 
@@ -194,8 +196,8 @@
             <TextView
                 android:id="@+id/textViewTheBrewery"
                 style="@style/FillWidth"
+                android:layout_alignLeft="@+id/cardViewBeer"
                 android:layout_below="@+id/cardViewBeer"
-                android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="sans-serif-light"
                 android:text="@string/the_brewery"
@@ -204,7 +206,7 @@
 
             <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/cardViewBrewery"
-                style="@style/BeerCard"
+                style="@style/BeerViewCard"
                 android:layout_below="@+id/textViewTheBrewery"
                 android:layout_gravity="start"
                 android:layout_marginBottom="10dp"
@@ -227,6 +229,7 @@
                         android:layout_toEndOf="@+id/imageViewBreweryLabel"
                         android:layout_toRightOf="@+id/imageViewBreweryLabel"
                         android:fontFamily="sans-serif-light"
+                        android:text="@string/placeholder_brewery_title"
                         android:textColor="#646464"
                         android:textSize="16sp" />
 
@@ -238,7 +241,8 @@
                         android:layout_below="@+id/textViewBreweryTitle"
                         android:layout_marginRight="15dp"
                         android:fontFamily="sans-serif"
-                        android:textColor="#cb4c53"
+                        android:text="@string/placeholder_brewery_website"
+                        android:textColor="#4a90e2"
                         android:textSize="12sp" />
 
                     <TextView
@@ -251,6 +255,7 @@
                         android:layout_below="@+id/textViewBreweryWebsite"
                         android:layout_marginTop="15dp"
                         android:paddingBottom="15dp"
+                        android:text="@string/placeholder_lorem_ipsum"
                         android:textColor="#66000000"
                         android:textSize="12sp" />
 

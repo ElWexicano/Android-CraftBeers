@@ -3,6 +3,7 @@ package ie.iamshanedoyle.craftbeers.ui;
 import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -246,6 +247,8 @@ public class BeerViewActivity extends BaseActivity implements ObservableScrollVi
 
         if (textViewBreweryWebsite != null && brewery.getWebsite() != null) {
             textViewBreweryWebsite.setText(brewery.getWebsite());
+            textViewBreweryWebsite.setPaintFlags(textViewBreweryWebsite.getPaintFlags() |
+                    Paint.UNDERLINE_TEXT_FLAG);
         }
 
         TextView textViewBreweryDescription = (TextView)

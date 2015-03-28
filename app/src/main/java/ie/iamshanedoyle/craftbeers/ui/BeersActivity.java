@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -77,7 +78,10 @@ public class BeersActivity extends BaseActivity {
         getSupportActionBar().setElevation(10);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        mLayoutManager = new LinearLayoutManager(this);
+
+        int numColumns = getResources().getInteger(R.integer.num_columns);
+
+        mLayoutManager = new GridLayoutManager(this, numColumns);
         recyclerView.setLayoutManager(mLayoutManager);
 
         mBeersAdapter = new BeersAdapter(this, mBeers);

@@ -11,8 +11,6 @@
 
     <style name="AppThemeFadingActionBar" parent="Theme.AppCompat.Light">
         <item name="windowActionBar">false</item>
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:fitsSystemWindows">true</item>
         <item name="colorPrimary">@color/beer_red</item>
         <item name="colorPrimaryDark">@color/beer_dark_red</item>
         <item name="colorAccent">@color/white</item>

@@ -17,8 +17,8 @@ public class CompatUtils {
         return Build.VERSION.SDK_INT;
     }
 
-    public static boolean isKitKatOrAbouve() {
-        return getSdkVersion() >= Build.VERSION_CODES.KITKAT;
+    public static boolean isLollipopOrAbove() {
+        return getSdkVersion() >= Build.VERSION_CODES.LOLLIPOP;
     }
 
     public static boolean isKitKatOrAbove() {

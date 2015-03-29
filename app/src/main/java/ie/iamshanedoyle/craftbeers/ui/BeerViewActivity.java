@@ -12,6 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.TextAppearanceSpan;
+import android.transition.Slide;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,7 +21,6 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.squareup.picasso.Picasso;
 
 import ie.iamshanedoyle.craftbeers.R;
@@ -46,7 +47,6 @@ public class BeerViewActivity extends BaseActivity implements ObservableScrollVi
     private int mLastDampedScroll;
     private int mInitialStatusBarColor;
     private int mFinalStatusBarColor;
-    private SystemBarTintManager mStatusBarManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +66,7 @@ public class BeerViewActivity extends BaseActivity implements ObservableScrollVi
         }
 
         initActionBar();
+        initAnimations();
         initBeerUI();
         initBreweryUI();
     }
@@ -126,14 +127,17 @@ public class BeerViewActivity extends BaseActivity implements ObservableScrollVi
      *
      * @param ratio A int of the ratio.
      */
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void updateStatusBarColor(float ratio) {
-        int r = GeneralUtils.interpolate(Color.red(mInitialStatusBarColor),
-                Color.red(mFinalStatusBarColor), 1 - ratio);
-        int g = GeneralUtils.interpolate(Color.green(mInitialStatusBarColor),
-                Color.green(mFinalStatusBarColor), 1 - ratio);
-        int b = GeneralUtils.interpolate(Color.blue(mInitialStatusBarColor),
-                Color.blue(mFinalStatusBarColor), 1 - ratio);
-        mStatusBarManager.setTintColor(Color.rgb(r, g, b));
+        if (CompatUtils.isLollipopOrAbove()) {
+            int r = GeneralUtils.interpolate(Color.red(mInitialStatusBarColor),
+                    Color.red(mFinalStatusBarColor), 1 - ratio);
+            int g = GeneralUtils.interpolate(Color.green(mInitialStatusBarColor),
+                    Color.green(mFinalStatusBarColor), 1 - ratio);
+            int b = GeneralUtils.interpolate(Color.blue(mInitialStatusBarColor),
+                    Color.blue(mFinalStatusBarColor), 1 - ratio);
+            getWindow().setStatusBarColor(Color.rgb(r, g, b));
+        }
     }
 
     /**
@@ -156,9 +160,6 @@ public class BeerViewActivity extends BaseActivity implements ObservableScrollVi
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         mActionBarBackgroundDrawable = mToolbar.getBackground();
-
-        mStatusBarManager = new SystemBarTintManager(this);
-        mStatusBarManager.setStatusBarTintEnabled(true);
         mInitialStatusBarColor = Color.TRANSPARENT;
         mFinalStatusBarColor = getResources().getColor(R.color.beer_dark_red);
 
@@ -174,6 +175,32 @@ public class BeerViewActivity extends BaseActivity implements ObservableScrollVi
             actionBar.setHomeButtonEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle(mBeer.getName() + " " + getString(R.string.beer));
+        }
+    }
+
+    /**
+     * Initialises the animations.
+     */
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void initAnimations() {
+        if (CompatUtils.isLollipopOrAbove()) {
+            // Enter Transition
+            Slide slideEnterTransition = new Slide(Gravity.BOTTOM);
+            slideEnterTransition.excludeTarget(android.R.id.navigationBarBackground, true);
+            slideEnterTransition.excludeTarget(android.R.id.statusBarBackground, true);
+            slideEnterTransition.excludeTarget(android.R.id.background, true);
+            slideEnterTransition.excludeTarget(R.id.toolbar, true);
+            slideEnterTransition.excludeTarget(R.id.header, true);
+            // Exit Transition
+            Slide slideExitTransition = new Slide(Gravity.BOTTOM);
+            slideExitTransition.excludeTarget(android.R.id.navigationBarBackground, true);
+            slideExitTransition.excludeTarget(android.R.id.statusBarBackground, true);
+            slideExitTransition.excludeTarget(android.R.id.background, true);
+            slideExitTransition.excludeTarget(R.id.toolbar, true);
+            slideExitTransition.excludeTarget(R.id.header, true);
+
+            getWindow().setEnterTransition(slideEnterTransition);
+            getWindow().setEnterTransition(slideExitTransition);
         }
     }
 

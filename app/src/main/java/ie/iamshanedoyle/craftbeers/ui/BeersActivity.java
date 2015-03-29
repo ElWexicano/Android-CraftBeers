@@ -1,8 +1,11 @@
 package ie.iamshanedoyle.craftbeers.ui;
 
+import android.annotation.TargetApi;
+import android.app.ActivityOptions;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -25,6 +28,7 @@ import ie.iamshanedoyle.craftbeers.adapters.RecyclerItemClickListener;
 import ie.iamshanedoyle.craftbeers.events.GetBeersEvent;
 import ie.iamshanedoyle.craftbeers.models.Beer;
 import ie.iamshanedoyle.craftbeers.services.BeersService;
+import ie.iamshanedoyle.craftbeers.utils.CompatUtils;
 
 /**
  * This activity is used for displaying a list of beers.
@@ -330,6 +334,18 @@ public class BeersActivity extends BaseActivity {
         Beer beer = mBeers.get(position);
         Intent intent = new Intent(this, BeerViewActivity.class);
         intent.putExtra(EXTRA_BEER, beer);
-        startActivity(intent);
+
+        if (CompatUtils.isLollipopOrAbove()) {
+            startActivityWithAnimation(intent);
+        } else {
+            startActivity(intent);
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void startActivityWithAnimation(Intent intent) {
+        ActivityOptions transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(
+                BeersActivity.this);
+        startActivity(intent, transitionActivityOptions.toBundle());
     }
 }

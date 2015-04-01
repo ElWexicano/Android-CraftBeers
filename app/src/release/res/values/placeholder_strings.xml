@@ -6,6 +6,6 @@
     <string name="placeholder_brewery_title"></string>
     <string name="placeholder_brewery_website"></string>
     <string name="placeholder_brewed_by"></string>
-    <string name="version">Version 1.0.0</string>
+    <string name="version"></string>
 
 </resources>

@@ -18,7 +18,7 @@ public class GeneralUtils {
     public static String getApplicationVersion(Context context) {
         PackageManager manager = context.getPackageManager();
         PackageInfo info;
-        StringBuilder version = new StringBuilder("Version ");
+        StringBuilder version = new StringBuilder("");
 
         try {
             info = manager.getPackageInfo(context.getPackageName(), 0);

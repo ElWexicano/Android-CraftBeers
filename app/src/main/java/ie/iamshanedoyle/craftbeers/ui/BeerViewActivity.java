@@ -2,9 +2,11 @@ package ie.iamshanedoyle.craftbeers.ui;
 
 import android.annotation.TargetApi;
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -235,7 +237,7 @@ public class BeerViewActivity extends BaseActivity implements ObservableScrollVi
 
         if (imageViewHeader != null && mBeer.hasLabel()) {
             Picasso.with(this).load(mBeer.getLabels().getLarge())
-                    .placeholder(R.drawable.header).into(imageViewHeader);
+                    .placeholder(R.drawable.img_header).into(imageViewHeader);
         }
 
         TextView textViewStyle = (TextView) findViewById(R.id.textViewStyle);
@@ -309,6 +311,20 @@ public class BeerViewActivity extends BaseActivity implements ObservableScrollVi
     }
 
     /**
+     * Opens the Google Play Store to check for updates.
+     */
+    private void checkForUpdate() {
+        final String appPackageName = getPackageName();
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("market://details?id=" + appPackageName)));
+        } catch (android.content.ActivityNotFoundException anfe) {
+            startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+        }
+    }
+
+    /**
      * Show the about dialog.
      */
     private void showAboutDialog() {
@@ -318,8 +334,26 @@ public class BeerViewActivity extends BaseActivity implements ObservableScrollVi
 
         TextView textView = (TextView) dialog.findViewById(R.id.textViewVersion);
 
+        String version = String.format(getString(R.string.version),
+                GeneralUtils.getApplicationVersion(this));
+        String tapToUpdate = getString(R.string.tap_to_update);
+
+        SpannableString spannableString = new SpannableString(version + "\n" + tapToUpdate);
+
+        int start = spannableString.length() - tapToUpdate.length();
+        int end = spannableString.length();
+
+        spannableString.setSpan(new TextAppearanceSpan(this, R.style.AboutSubText), start,
+                end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
         if (textView != null) {
-            textView.setText(GeneralUtils.getApplicationVersion(this));
+            textView.setText(spannableString);
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    checkForUpdate();
+                }
+            });
         }
 
         dialog.show();

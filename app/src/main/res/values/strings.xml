@@ -6,7 +6,7 @@
     <string name="title_activity_beer_view">Beer</string>
     <string name="search_hint">Search Beers</string>
     <string name="search">Search</string>
-    <string name="developed_by">Developed by @ElWexicano</string>
+    <string name="developed_by">Made by <b>@ElWexicano</b> with as much love as possible!</string>
     <string name="transition_title">transition_title</string>
     <string name="transition_description">transition_description</string>
     <string name="transition_card">transition_card</string>
@@ -25,4 +25,7 @@
     <string name="the_brewery">THE BREWER</string>
     <string name="no_beers_found">No Beers Found</string>
     <string name="no_beers_found_message">Awh suds, we can\'t find any beers!</string>
+    <string name="share">Share Craft Beers</string>
+    <string name="tap_to_update">Tap to check for Updates</string>
+    <string name="version">Version %s</string>
 </resources>

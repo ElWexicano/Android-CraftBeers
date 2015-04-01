@@ -21,7 +21,7 @@
                 android:layout_height="300dp"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/header"
+                android:src="@drawable/img_header"
                 android:tint="#8c000000"
                 android:tintMode="src_atop" />
 

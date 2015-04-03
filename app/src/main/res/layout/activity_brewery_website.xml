@@ -1,0 +1,22 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/ActivityBase"
+    android:background="@null"
+    tools:context="ie.iamshanedoyle.craftbeers.ui.BreweryWebsiteActivity">
+
+    <WebView
+        android:id="@+id/webView"
+        style="@style/Fill"
+        android:layout_below="@+id/toolbar" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/MatchWidth"
+        android:layout_gravity="top"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/AppThemeWebView" />
+
+</RelativeLayout>

@@ -4,6 +4,7 @@
     <string name="app_name">Craft Beers</string>
     <string name="action_about">About</string>
     <string name="title_activity_beer_view">Beer</string>
+    <string name="title_activity_brewery_website">Brewery Website</string>
     <string name="search_hint">Search Beers</string>
     <string name="search">Search</string>
     <string name="developed_by">Made by <b>@ElWexicano</b> with as much love as possible!</string>
@@ -28,4 +29,6 @@
     <string name="share">Share Craft Beers</string>
     <string name="tap_to_update">Tap to check for Updates</string>
     <string name="version">Version %s</string>
+    <string name="action_refresh">Refresh</string>
+
 </resources>

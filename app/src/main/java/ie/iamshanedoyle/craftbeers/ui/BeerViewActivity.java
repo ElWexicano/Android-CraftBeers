@@ -278,6 +278,12 @@ public class BeerViewActivity extends BaseActivity implements ObservableScrollVi
             textViewBreweryWebsite.setText(brewery.getWebsite());
             textViewBreweryWebsite.setPaintFlags(textViewBreweryWebsite.getPaintFlags() |
                     Paint.UNDERLINE_TEXT_FLAG);
+            textViewBreweryWebsite.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openBreweryWebsite();
+                }
+            });
         }
 
         TextView textViewBreweryDescription = (TextView)
@@ -313,7 +319,7 @@ public class BeerViewActivity extends BaseActivity implements ObservableScrollVi
     /**
      * Opens the Google Play Store to check for updates.
      */
-    private void checkForUpdate() {
+    private void openGooglePlayPage() {
         final String appPackageName = getPackageName();
         try {
             startActivity(new Intent(Intent.ACTION_VIEW,
@@ -325,6 +331,15 @@ public class BeerViewActivity extends BaseActivity implements ObservableScrollVi
     }
 
     /**
+     * Opens the brewery website.
+     */
+    private void openBreweryWebsite() {
+        Intent intent = new Intent(this, BreweryWebsiteActivity.class);
+        intent.putExtra(BreweryWebsiteActivity.EXTRA_BREWERY_URL, mBeer.getBrewery().getWebsite());
+        startActivity(intent);
+    }
+
+    /**
      * Show the about dialog.
      */
     private void showAboutDialog() {
@@ -332,7 +347,7 @@ public class BeerViewActivity extends BaseActivity implements ObservableScrollVi
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.about_dialog);
 
-        TextView textView = (TextView) dialog.findViewById(R.id.textViewVersion);
+        TextView textViewVersion = (TextView) dialog.findViewById(R.id.textViewVersion);
 
         String version = String.format(getString(R.string.version),
                 GeneralUtils.getApplicationVersion(this));
@@ -346,12 +361,12 @@ public class BeerViewActivity extends BaseActivity implements ObservableScrollVi
         spannableString.setSpan(new TextAppearanceSpan(this, R.style.AboutSubText), start,
                 end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        if (textView != null) {
-            textView.setText(spannableString);
-            textView.setOnClickListener(new View.OnClickListener() {
+        if (textViewVersion != null) {
+            textViewVersion.setText(spannableString);
+            textViewVersion.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    checkForUpdate();
+                    openGooglePlayPage();
                 }
             });
         }

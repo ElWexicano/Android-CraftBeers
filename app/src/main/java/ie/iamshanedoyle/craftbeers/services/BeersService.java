@@ -101,7 +101,7 @@ public class BeersService extends IntentService {
     private void getBeers(int pageNumber) {
         GetBeersEvent getBeersEvent = new GetBeersEvent();
 
-        Map<String, String> parametersMap = new HashMap<String, String>();
+        Map<String, String> parametersMap = new HashMap<>();
 
         if (pageNumber != -1) {
             parametersMap.put("p", Integer.toString(pageNumber));

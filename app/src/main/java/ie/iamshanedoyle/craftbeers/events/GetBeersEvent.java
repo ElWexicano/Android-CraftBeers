@@ -12,7 +12,7 @@ import ie.iamshanedoyle.craftbeers.models.Beer;
  */
 public class GetBeersEvent extends Event {
 
-    private List<Beer> mBeers = new ArrayList<Beer>();
+    private List<Beer> mBeers = new ArrayList<>();
     private int mNumberOfPages;
 
     public List<Beer> getBeers() {

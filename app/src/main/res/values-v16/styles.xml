@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppThemeTitle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="BeerTitle" parent="FillWidth">
+        <item name="android:textColor">#646464</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:layout_marginRight">15dp</item>
+        <item name="android:layout_toRightOf">@+id/imageViewBeerLabel</item>
+        <item name="android:layout_alignTop">@+id/imageViewBeerLabel</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <style name="BeerValue">
+        <item name="android:textColor">#d56f75</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="AboutText" parent="FillWidth">
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">18dp</item>
+        <item name="android:paddingTop">18dp</item>
+        <item name="android:paddingBottom">18dp</item>
+        <item name="android:paddingRight">18dp</item>
+        <item name="android:textColor">#646464</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+</resources>

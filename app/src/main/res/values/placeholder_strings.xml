@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="placeholder_lorem_ipsum"></string>
-    <string name="placeholder_beer_title"></string>
-    <string name="placeholder_brewery_title"></string>
-    <string name="placeholder_brewery_website"></string>
-    <string name="placeholder_brewed_by"></string>
+    <string name="placeholder_lorem_ipsum" />
+    <string name="placeholder_beer_title" />
+    <string name="placeholder_brewery_title" />
+    <string name="placeholder_brewery_website" />
+    <string name="placeholder_brewed_by" />
     <string name="placeholder_version">Version 1.0.0</string>
 
 </resources>

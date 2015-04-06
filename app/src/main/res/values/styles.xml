@@ -30,9 +30,7 @@
     </style>
 
     <style name="AppThemeTitle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textSize">17sp</item>
-        <item name="android:paddingStart">12sp</item>
     </style>
 
     <style name="AppThemeSubTitle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle">
@@ -131,7 +129,6 @@
         <item name="android:layout_marginRight">15dp</item>
         <item name="android:layout_toRightOf">@+id/imageViewBeerLabel</item>
         <item name="android:layout_alignTop">@+id/imageViewBeerLabel</item>
-        <item name="android:fontFamily">sans-serif-light</item>
     </style>
 
     <style name="BeerShortDescription" parent="FillWidth">
@@ -160,7 +157,6 @@
     <style name="BeerValue">
         <item name="android:textColor">#d56f75</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
     <style name="Beers" parent="Match">
@@ -171,7 +167,6 @@
 
     <style name="AboutText" parent="FillWidth">
         <item name="android:layout_gravity">center_horizontal</item>
-        <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:gravity">center</item>
         <item name="android:paddingLeft">18dp</item>
         <item name="android:paddingTop">18dp</item>

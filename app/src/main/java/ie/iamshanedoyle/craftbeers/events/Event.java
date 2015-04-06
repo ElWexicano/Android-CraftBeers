@@ -1,7 +1,9 @@
 package ie.iamshanedoyle.craftbeers.events;
 
 /**
- * Created by shane on 12/03/15.
+ * A base event class.
+ *
+ * @author Shane Doyle <@ElWexicano>
  */
 public abstract class Event {
 

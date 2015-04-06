@@ -127,7 +127,7 @@ public class BeerViewActivity extends BaseActivity implements ObservableScrollVi
     }
 
     @Override
-    public void onScrollChanged(int l, int t) {
+    public void onScrollChanged(int t) {
         final int headerHeight = mHeader.getHeight() - mToolbar.getHeight();
         final float ratio = (float) Math.min(Math.max(t, 0), headerHeight) / headerHeight;
         final int alpha = (int) (ratio * 255);

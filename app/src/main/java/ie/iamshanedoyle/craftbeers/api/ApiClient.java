@@ -1,7 +1,5 @@
 package ie.iamshanedoyle.craftbeers.api;
 
-import android.content.Context;
-
 import retrofit.RestAdapter;
 
 /**
@@ -11,17 +9,15 @@ import retrofit.RestAdapter;
  */
 public class ApiClient {
 
-    private static RestAdapter sRestAdapter;
-
     private static final String BASE_URL = "http://api.brewerydb.com/v2";
+    private static RestAdapter sRestAdapter;
 
     /**
      * Gets the API (RestAdapter) used to perform requests to the BreweryDB API.
      *
-     * @param context A Context.
      * @return A RestAdapter.
      */
-    public static RestAdapter getApi(final Context context) {
+    public static RestAdapter getApi() {
 
         if (sRestAdapter == null) {
             sRestAdapter = new RestAdapter.Builder()

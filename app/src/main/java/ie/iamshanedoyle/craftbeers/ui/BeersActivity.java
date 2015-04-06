@@ -94,7 +94,7 @@ public class BeersActivity extends BaseActivity {
                 new RecyclerItemClickListener(this,
                         new RecyclerItemClickListener.OnItemClickListener() {
                             @Override
-                            public void onItemClick(View view, int position) {
+                            public void onItemClick(int position) {
                                 onBeerClicked(position);
                             }
                         }));

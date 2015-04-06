@@ -2,7 +2,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/ActivityBase"
-    android:background="@null"
     tools:context=".ui.BeerViewActivity">
 
     <ie.iamshanedoyle.craftbeers.ui.widgets.ObservableScrollView
@@ -94,16 +93,8 @@
 
                     <TextView
                         android:id="@+id/textViewStyle"
-                        style="@style/FillWidth"
-                        android:layout_below="@+id/textViewShowMore"
-                        android:layout_marginTop="6dp"
-                        android:fontFamily="sans-serif-light"
-                        android:gravity="center_horizontal"
-                        android:lines="2"
-                        android:maxLines="3"
-                        android:paddingBottom="12dp"
-                        android:textColor="#33000000"
-                        android:textSize="10sp" />
+                        style="@style/BeerAttributeTitle"
+                        android:layout_below="@+id/textViewShowMore" />
 
                     <View
                         android:id="@+id/divider2"
@@ -122,16 +113,7 @@
 
                         <TextView
                             android:id="@+id/textViewAbv"
-                            android:layout_width="0dip"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:fontFamily="sans-serif-light"
-                            android:gravity="center"
-                            android:paddingBottom="5dp"
-                            android:paddingTop="5dp"
-                            android:textColor="#33000000"
-                            android:textSize="10sp" />
+                            style="@style/BeerAttributeTitleMulti" />
 
                         <View
                             style="@style/VerticalDivider"
@@ -140,16 +122,7 @@
 
                         <TextView
                             android:id="@+id/textViewIbu"
-                            android:layout_width="0dip"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:fontFamily="sans-serif-light"
-                            android:gravity="center"
-                            android:paddingBottom="5dp"
-                            android:paddingTop="5dp"
-                            android:textColor="#33000000"
-                            android:textSize="10sp" />
+                            style="@style/BeerAttributeTitleMulti" />
 
                         <View
                             style="@style/VerticalDivider"
@@ -158,16 +131,7 @@
 
                         <TextView
                             android:id="@+id/textViewGlass"
-                            android:layout_width="0dip"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:fontFamily="sans-serif-light"
-                            android:gravity="center"
-                            android:paddingBottom="5dp"
-                            android:paddingTop="5dp"
-                            android:textColor="#33000000"
-                            android:textSize="10sp" />
+                            style="@style/BeerAttributeTitleMulti" />
 
                         <View
                             style="@style/VerticalDivider"
@@ -176,16 +140,7 @@
 
                         <TextView
                             android:id="@+id/textViewYear"
-                            android:layout_width="0dip"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:fontFamily="sans-serif-light"
-                            android:gravity="center"
-                            android:paddingBottom="5dp"
-                            android:paddingTop="5dp"
-                            android:textColor="#33000000"
-                            android:textSize="10sp" />
+                            style="@style/BeerAttributeTitleMulti" />
 
                     </LinearLayout>
 

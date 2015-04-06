@@ -23,14 +23,14 @@ import retrofit.RetrofitError;
  */
 public class BeersService extends IntentService {
 
-    public static final String ACTION_GET_BEERS = "ActionGetBeers";
-    public static final String ACTION_GET_BEER = "ActionGetBeer";
+    private static final String ACTION_GET_BEERS = "ActionGetBeers";
+    private static final String ACTION_GET_BEER = "ActionGetBeer";
 
-    public static final String EXTRA_BEER_KEYWORD = "ExtraBeerKeyword";
-    public static final String EXTRA_BEER_ID = "ExtraBeerId";
-    public static final String EXTRA_PAGE = "ExtraPage";
+    private static final String EXTRA_BEER_KEYWORD = "ExtraBeerKeyword";
+    private static final String EXTRA_BEER_ID = "ExtraBeerId";
+    private static final String EXTRA_PAGE = "ExtraPage";
 
-    public static final String NAME = "BeersService";
+    private static final String NAME = "BeersService";
 
     private String mApiKey;
 
@@ -113,7 +113,7 @@ public class BeersService extends IntentService {
 
         try {
             BeersInterface.BeersResponse beersResponse =
-                    ApiClient.getApi(this).create(BeersInterface.class).getBeers(parametersMap);
+                    ApiClient.getApi().create(BeersInterface.class).getBeers(parametersMap);
             getBeersEvent.setBeers(beersResponse.getData());
             getBeersEvent.setStatus(Event.Status.SUCCESSFUL);
             getBeersEvent.setNumberOfPages(beersResponse.getNumberOfPages());
@@ -146,7 +146,7 @@ public class BeersService extends IntentService {
 
         try {
             BeersInterface.BeersResponse beersResponse =
-                    ApiClient.getApi(this).create(BeersInterface.class).searchBeers(parametersMap);
+                    ApiClient.getApi().create(BeersInterface.class).searchBeers(parametersMap);
             getBeersEvent.setBeers(beersResponse.getData());
             getBeersEvent.setStatus(Event.Status.SUCCESSFUL);
             getBeersEvent.setNumberOfPages(beersResponse.getNumberOfPages());
@@ -167,7 +167,7 @@ public class BeersService extends IntentService {
 
         try {
             BeersInterface.BeerResponse beerResponse =
-                    ApiClient.getApi(this).create(BeersInterface.class).getBeer(beerId, mApiKey);
+                    ApiClient.getApi().create(BeersInterface.class).getBeer(beerId, mApiKey);
             getBeerEvent.setBeer(beerResponse.getData());
             getBeerEvent.setStatus(Event.Status.SUCCESSFUL);
             EventBus.getDefault().post(getBeerEvent);

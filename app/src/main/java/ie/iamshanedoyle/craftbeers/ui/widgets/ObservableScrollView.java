@@ -26,7 +26,7 @@ public class ObservableScrollView extends ScrollView {
         super.onScrollChanged(l, t, oldl, oldt);
 
         if (mScrollListener != null) {
-            mScrollListener.onScrollChanged(l, t);
+            mScrollListener.onScrollChanged(t);
         }
     }
 
@@ -66,6 +66,6 @@ public class ObservableScrollView extends ScrollView {
      * A simple interface to be used as a Scroll Listener.
      */
     public static interface ScrollListener {
-        public void onScrollChanged(int deltaX, int deltaY);
+        public void onScrollChanged(int deltaY);
     }
 }

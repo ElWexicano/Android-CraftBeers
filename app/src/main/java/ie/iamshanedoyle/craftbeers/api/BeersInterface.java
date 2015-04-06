@@ -36,9 +36,9 @@ public interface BeersInterface {
      */
     public class BeerResponse {
 
-        protected String status;
-        protected String message;
-        protected Beer data;
+        String status;
+        String message;
+        Beer data;
 
         public String getStatus() {
             return status;
@@ -57,9 +57,9 @@ public interface BeersInterface {
      * A simple Beers response.
      */
     public class BeersResponse {
-        protected String status;
-        protected List<Beer> data;
-        protected int numberOfPages;
+        String status;
+        List<Beer> data;
+        int numberOfPages;
 
         public String getStatus() {
             return status;

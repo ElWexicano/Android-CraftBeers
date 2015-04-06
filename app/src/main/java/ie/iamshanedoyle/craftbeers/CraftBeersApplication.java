@@ -17,8 +17,8 @@ public class CraftBeersApplication extends Application {
 
     private static final String APP_ID = "UA-60730724-1";
 
-    GoogleAnalytics analyticsInstance;
-    Tracker tracker;
+    private GoogleAnalytics mAnalyticsInstance;
+    private Tracker mTracker;
 
     @Override
     public void onCreate() {
@@ -29,7 +29,7 @@ public class CraftBeersApplication extends Application {
     }
 
     public Tracker getTracker() {
-        return tracker;
+        return mTracker;
     }
 
     private void startCrashlytics() {
@@ -37,8 +37,8 @@ public class CraftBeersApplication extends Application {
     }
 
     private void startGoogleAnalytics() {
-        analyticsInstance = GoogleAnalytics.getInstance(this);
-        tracker = analyticsInstance.newTracker(APP_ID);
-        tracker.enableAdvertisingIdCollection(true);
+        mAnalyticsInstance = GoogleAnalytics.getInstance(this);
+        mTracker = mAnalyticsInstance.newTracker(APP_ID);
+        mTracker.enableAdvertisingIdCollection(true);
     }
 }

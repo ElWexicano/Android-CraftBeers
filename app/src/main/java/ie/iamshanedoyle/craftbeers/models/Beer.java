@@ -38,7 +38,7 @@ public class Beer implements Parcelable {
     public Beer() {
     }
 
-    public Beer(Parcel parcel) {
+    private Beer(Parcel parcel) {
         readFromParcel(parcel);
     }
 

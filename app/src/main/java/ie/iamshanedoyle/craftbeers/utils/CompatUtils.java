@@ -13,7 +13,7 @@ public class CompatUtils {
         throw new Error("No instances");
     }
 
-    public static int getSdkVersion() {
+    private static int getSdkVersion() {
         return Build.VERSION.SDK_INT;
     }
 

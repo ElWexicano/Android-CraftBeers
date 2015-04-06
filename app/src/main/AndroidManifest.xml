@@ -47,8 +47,9 @@
             android:name=".ui.BeerViewActivity"
             android:label="@string/title_activity_beer_view"
             android:launchMode="singleTop"
-            android:parentActivityName=".ui.BeersActivity">
-            <meta-data
+            android:parentActivityName=".ui.BeersActivity"
+            android:theme="@style/AppThemeFadingActionBar">
+        <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.BeersActivity" />
         </activity>

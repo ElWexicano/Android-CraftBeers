@@ -10,6 +10,15 @@
         <item name="android:windowBackground">@color/beer_grey</item>
     </style>
 
+    <style name="AppThemeFadingActionBar" parent="Theme.AppCompat.Light">
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">@color/beer_red</item>
+        <item name="colorPrimaryDark">@color/beer_dark_red</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:windowBackground">@color/beer_grey</item>
+    </style>
+
     <style name="AppThemeWebView" parent="Theme.AppCompat.Light">
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryDark">@color/beer_dark_red</item>
@@ -18,6 +27,16 @@
         <item name="android:textColorSecondary">@color/beer_red</item>
         <item name="windowActionBar">false</item>
         <item name="android:windowBackground">@color/beer_grey</item>
+    </style>
+
+    <style name="AppThemeTitle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:paddingStart">12sp</item>
+    </style>
+
+    <style name="AppThemeSubTitle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle">
+        <item name="android:textSize">11sp</item>
     </style>
 
     <!-- Generic Styles - Start -->
@@ -56,7 +75,7 @@
     <!-- Generic Styles - End -->
 
     <style name="ActivityBase" parent="Match">
-
+        <item name="android:background">@null</item>
     </style>
 
     <style name="BeerCard" parent="FillWidth">

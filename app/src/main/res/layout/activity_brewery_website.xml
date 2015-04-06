@@ -2,7 +2,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/ActivityBase"
-    android:background="@null"
     tools:context="ie.iamshanedoyle.craftbeers.ui.BreweryWebsiteActivity">
 
     <WebView
@@ -17,6 +16,8 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:theme="@style/AppThemeWebView" />
+        app:subtitleTextAppearance="@style/AppThemeSubTitle"
+        app:theme="@style/AppThemeWebView"
+        app:titleTextAppearance="@style/AppThemeTitle" />
 
 </RelativeLayout>

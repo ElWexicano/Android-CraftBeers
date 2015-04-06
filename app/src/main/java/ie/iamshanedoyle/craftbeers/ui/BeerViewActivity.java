@@ -39,20 +39,33 @@ import ie.iamshanedoyle.craftbeers.utils.GeneralUtils;
  */
 public class BeerViewActivity extends BaseActivity implements ObservableScrollView.ScrollListener {
 
+    /**
+     * Constants
+     */
     private static final String SCREEN_NAME = "BeerViewScreen";
-    private Beer mBeer;
+    private static final String EXTRA_LAST_RATIO = "LastRatio";
+    private static final String EXTRA_LAST_ALPHA = "LastAlpha";
+    private static final String EXTRA_LAST_DAMPED_SCROLL = "LastDampedScroll";
 
-    // Header stuff
-    private Toolbar mToolbar;
-    private Drawable mActionBarBackgroundDrawable;
-    private View mHeader;
+    /**
+     * Mutables.
+     */
+    private Beer mBeer;
+    private int mLastAlpha = 0;
+    private float mLastRatio;
     private int mLastDampedScroll;
     private int mInitialStatusBarColor;
     private int mFinalStatusBarColor;
+    private Drawable mActionBarBackgroundDrawable;
+
+    /**
+     * Views
+     */
+    private Toolbar mToolbar;
+    private View mHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_beer_view);
@@ -67,10 +80,27 @@ public class BeerViewActivity extends BaseActivity implements ObservableScrollVi
             return;
         }
 
+        if (savedInstanceState != null) {
+            mBeer = savedInstanceState.getParcelable(BeersActivity.EXTRA_BEER);
+            mLastAlpha = savedInstanceState.getInt(EXTRA_LAST_ALPHA);
+            mLastRatio = savedInstanceState.getFloat(EXTRA_LAST_RATIO);
+            mLastDampedScroll = savedInstanceState.getInt(EXTRA_LAST_DAMPED_SCROLL);
+        }
+
         initActionBar();
         initAnimations();
         initBeerUI();
         initBreweryUI();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putParcelable(BeersActivity.EXTRA_BEER, mBeer);
+        outState.putInt(EXTRA_LAST_ALPHA, mLastAlpha);
+        outState.putFloat(EXTRA_LAST_RATIO, mLastRatio);
+        outState.putInt(EXTRA_LAST_DAMPED_SCROLL, mLastDampedScroll);
+
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -101,6 +131,9 @@ public class BeerViewActivity extends BaseActivity implements ObservableScrollVi
         final int headerHeight = mHeader.getHeight() - mToolbar.getHeight();
         final float ratio = (float) Math.min(Math.max(t, 0), headerHeight) / headerHeight;
         final int alpha = (int) (ratio * 255);
+
+        mLastAlpha = alpha;
+        mLastRatio = ratio;
 
         updateActionBarColor(alpha);
         updateStatusBarColor(ratio);
@@ -170,14 +203,16 @@ public class BeerViewActivity extends BaseActivity implements ObservableScrollVi
         ObservableScrollView scrollView = (ObservableScrollView) findViewById(R.id.scrollview);
         scrollView.addCallbacks(this);
 
-        onScrollChanged(-1, 0);
-
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setHomeButtonEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle(mBeer.getName() + " " + getString(R.string.beer));
         }
+
+        updateActionBarColor(mLastAlpha);
+        updateStatusBarColor(mLastRatio);
+        updateParallaxEffect(0);
     }
 
     /**
@@ -210,6 +245,10 @@ public class BeerViewActivity extends BaseActivity implements ObservableScrollVi
      * Initialises the beer UI.
      */
     private void initBeerUI() {
+        if (mBeer == null) {
+            return;
+        }
+
         TextView mTextViewTitle = (TextView) findViewById(R.id.textViewBeerTitle);
 
         if (mTextViewTitle != null) {
@@ -260,7 +299,7 @@ public class BeerViewActivity extends BaseActivity implements ObservableScrollVi
      * Initialises the brewery UI.
      */
     private void initBreweryUI() {
-        if (!mBeer.hasBrewery()) {
+        if (mBeer == null || !mBeer.hasBrewery()) {
             return;
         }
 

@@ -57,9 +57,10 @@ public class BreweryWebsiteActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_refresh) {
-            refreshWebView();
-            return true;
+        switch (id) {
+            case R.id.action_refresh:
+                refreshWebView();
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -96,6 +97,8 @@ public class BreweryWebsiteActivity extends BaseActivity {
      */
     private void initWebView() {
         mWebView = (WebView) findViewById(R.id.webView);
+        mWebView.getSettings().setSupportZoom(true);
+        mWebView.getSettings().setDisplayZoomControls(false);
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {

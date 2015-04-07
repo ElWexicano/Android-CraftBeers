@@ -21,10 +21,6 @@ public class CompatUtils {
         return getSdkVersion() >= Build.VERSION_CODES.LOLLIPOP;
     }
 
-    public static boolean isKitKatOrAbove() {
-        return getSdkVersion() >= Build.VERSION_CODES.KITKAT;
-    }
-
     public static boolean isJellyBeanOrAbove() {
         return getSdkVersion() >= Build.VERSION_CODES.JELLY_BEAN;
     }

@@ -14,7 +14,6 @@ repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
 
-
 android {
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
@@ -67,5 +66,5 @@ dependencies {
 
     // Robolectric
     testCompile 'junit:junit:4.12'
-    testCompile 'org.robolectric:robolectric:2.4'
+    testCompile 'org.robolectric:robolectric:3.0-rc2'
 }

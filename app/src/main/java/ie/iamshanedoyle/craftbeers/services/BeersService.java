@@ -23,12 +23,12 @@ import retrofit.RetrofitError;
  */
 public class BeersService extends IntentService {
 
-    private static final String ACTION_GET_BEERS = "ActionGetBeers";
-    private static final String ACTION_GET_BEER = "ActionGetBeer";
+    public static final String ACTION_GET_BEERS = "ActionGetBeers";
+    public static final String ACTION_GET_BEER = "ActionGetBeer";
 
-    private static final String EXTRA_BEER_KEYWORD = "ExtraBeerKeyword";
-    private static final String EXTRA_BEER_ID = "ExtraBeerId";
-    private static final String EXTRA_PAGE = "ExtraPage";
+    public static final String EXTRA_BEER_KEYWORD = "ExtraBeerKeyword";
+    public static final String EXTRA_BEER_ID = "ExtraBeerId";
+    public static final String EXTRA_PAGE = "ExtraPage";
 
     private static final String NAME = "BeersService";
 
@@ -120,6 +120,7 @@ public class BeersService extends IntentService {
             EventBus.getDefault().post(getBeersEvent);
         } catch (RetrofitError retrofitError) {
             getBeersEvent.setStatus(Event.Status.FAILED);
+            EventBus.getDefault().post(getBeersEvent);
         }
 
     }
@@ -153,6 +154,7 @@ public class BeersService extends IntentService {
             EventBus.getDefault().post(getBeersEvent);
         } catch (RetrofitError retrofitError) {
             getBeersEvent.setStatus(Event.Status.FAILED);
+            EventBus.getDefault().post(getBeersEvent);
         }
     }
 
@@ -173,6 +175,7 @@ public class BeersService extends IntentService {
             EventBus.getDefault().post(getBeerEvent);
         } catch (RetrofitError retrofitError) {
             getBeerEvent.setStatus(Event.Status.FAILED);
+            EventBus.getDefault().post(getBeerEvent);
         }
     }
 }

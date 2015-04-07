@@ -24,15 +24,20 @@ android {
 
     defaultConfig {
         applicationId "ie.iamshanedoyle.craftbeers"
-        minSdkVersion 11
+        minSdkVersion 15
         targetSdkVersion 21
         versionCode versionProps['code'].toInteger()
         versionName "${versionProps['major']}.${versionProps['minor']}.${versionProps['patch']}"
     }
+
     buildTypes {
         release {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    packagingOptions {
+        exclude 'LICENSE.txt'
     }
 }
 
@@ -59,4 +64,8 @@ dependencies {
     }
     // Translucent System Bar
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+
+    // Robolectric
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.robolectric:robolectric:2.4'
 }

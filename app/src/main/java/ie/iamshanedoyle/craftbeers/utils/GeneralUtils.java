@@ -15,6 +15,12 @@ public class GeneralUtils {
         return (int) (from * param + to * (1 - param));
     }
 
+    /**
+     * Returns the application version as a string.
+     *
+     * @param context Context
+     * @return String
+     */
     public static String getApplicationVersion(Context context) {
         PackageManager manager = context.getPackageManager();
         PackageInfo info;

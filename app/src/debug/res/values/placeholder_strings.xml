@@ -6,5 +6,6 @@
     <string name="placeholder_brewery_title">Milwaukee Brewing Company</string>
     <string name="placeholder_brewery_website">http://mkbrewingcompany.com/</string>
     <string name="placeholder_brewed_by">Brewed by <b>Unita Brewing Company</b> since 2011</string>
+    <string name="placeholder_version">Version 1.0.0</string>
 
 </resources>

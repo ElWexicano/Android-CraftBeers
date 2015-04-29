@@ -13,6 +13,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.style.StyleSpan;
 import android.text.style.TextAppearanceSpan;
 import android.transition.Slide;
 import android.view.Gravity;
@@ -397,6 +398,8 @@ public class BeerViewActivity extends BaseActivity implements ObservableScrollVi
         int start = spannableString.length() - tapToUpdate.length();
         int end = spannableString.length();
 
+        spannableString.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), "Version".length(),
+                version.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannableString.setSpan(new TextAppearanceSpan(this, R.style.AboutSubText), start,
                 end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 

@@ -19,6 +19,9 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
 
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.SearchEvent;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -250,6 +253,9 @@ public class BeersActivity extends BaseActivity {
         mBeerKeywords = keywordSearch;
         mPageNumber = 1;
         search();
+
+        Answers.getInstance().logSearch(new SearchEvent()
+                .putQuery(keywordSearch));
     }
 
     /**

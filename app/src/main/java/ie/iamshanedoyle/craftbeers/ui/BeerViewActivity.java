@@ -24,6 +24,8 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.ContentViewEvent;
 import com.squareup.picasso.Picasso;
 
 import ie.iamshanedoyle.craftbeers.R;
@@ -47,6 +49,7 @@ public class BeerViewActivity extends BaseActivity implements ObservableScrollVi
     private static final String EXTRA_LAST_RATIO = "LastRatio";
     private static final String EXTRA_LAST_ALPHA = "LastAlpha";
     private static final String EXTRA_LAST_DAMPED_SCROLL = "LastDampedScroll";
+    private static final String BEER = "Beer";
 
     /**
      * Mutables.
@@ -79,6 +82,11 @@ public class BeerViewActivity extends BaseActivity implements ObservableScrollVi
 
         if (mBeer == null) {
             return;
+        } else {
+            Answers.getInstance().logContentView(new ContentViewEvent()
+                    .putContentName(mBeer.getName())
+                    .putContentType(BEER)
+                    .putContentId(mBeer.getId()));
         }
 
         if (savedInstanceState != null) {

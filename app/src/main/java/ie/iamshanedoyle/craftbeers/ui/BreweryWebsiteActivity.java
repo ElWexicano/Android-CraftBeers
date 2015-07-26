@@ -8,6 +8,9 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.ContentViewEvent;
+
 import ie.iamshanedoyle.craftbeers.R;
 
 /**
@@ -22,6 +25,7 @@ public class BreweryWebsiteActivity extends BaseActivity {
      * Constants.
      */
     private static final String SCREEN_NAME = "WebViewScreen";
+    private static final String BREWERY_WEBSITE = "Brewery Website";
     /**
      * Mutables
      */
@@ -40,6 +44,10 @@ public class BreweryWebsiteActivity extends BaseActivity {
         if (getIntent() != null) {
             if (getIntent().hasExtra(EXTRA_BREWERY_URL)) {
                 mBreweryWebsiteUrl = getIntent().getStringExtra(EXTRA_BREWERY_URL);
+
+                Answers.getInstance().logContentView(new ContentViewEvent()
+                        .putContentName(mBreweryWebsiteUrl)
+                        .putContentType(BREWERY_WEBSITE));
             }
         }
 

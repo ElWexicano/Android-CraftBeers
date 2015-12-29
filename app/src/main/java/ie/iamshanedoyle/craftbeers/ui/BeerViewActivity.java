@@ -75,9 +75,9 @@ public class BeerViewActivity extends BaseActivity implements ObservableScrollVi
         setContentView(R.layout.activity_beer_view);
 
         if (getIntent() != null) {
-            if (getIntent().hasExtra(BeersActivity.EXTRA_BEER)) {
-                mBeer = getIntent().getParcelableExtra(BeersActivity.EXTRA_BEER);
-            }
+                if (getIntent().hasExtra(BeersActivity.EXTRA_BEER)) {
+                    mBeer = getIntent().getParcelableExtra(BeersActivity.EXTRA_BEER);
+                }
         }
 
         if (mBeer == null) {

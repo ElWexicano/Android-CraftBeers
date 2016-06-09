@@ -83,10 +83,7 @@ public class BeerViewActivity extends BaseActivity implements ObservableScrollVi
         if (mBeer == null) {
             return;
         } else {
-            Answers.getInstance().logContentView(new ContentViewEvent()
-                    .putContentName(mBeer.getName())
-                    .putContentType(BEER)
-                    .putContentId(mBeer.getId()));
+            trackBeerContentView();
         }
 
         if (savedInstanceState != null) {
@@ -100,6 +97,16 @@ public class BeerViewActivity extends BaseActivity implements ObservableScrollVi
         initAnimations();
         initBeerUI();
         initBreweryUI();
+    }
+
+    /**
+     * Tracks a beer content view.
+     */
+    private void trackBeerContentView() {
+        Answers.getInstance().logContentView(new ContentViewEvent()
+                .putContentName(mBeer.getName())
+                .putContentType(BEER)
+                .putContentId(mBeer.getId()));
     }
 
     @Override

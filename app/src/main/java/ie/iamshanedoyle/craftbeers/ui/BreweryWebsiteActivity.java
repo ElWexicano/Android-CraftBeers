@@ -26,6 +26,8 @@ public class BreweryWebsiteActivity extends BaseActivity {
      */
     private static final String SCREEN_NAME = "WebViewScreen";
     private static final String BREWERY_WEBSITE = "Brewery Website";
+    private static final String BREWERY = "Brewery";
+
     /**
      * Mutables
      */
@@ -44,15 +46,21 @@ public class BreweryWebsiteActivity extends BaseActivity {
         if (getIntent() != null) {
             if (getIntent().hasExtra(EXTRA_BREWERY_URL)) {
                 mBreweryWebsiteUrl = getIntent().getStringExtra(EXTRA_BREWERY_URL);
-
-                Answers.getInstance().logContentView(new ContentViewEvent()
-                        .putContentName(mBreweryWebsiteUrl)
-                        .putContentType(BREWERY_WEBSITE));
+                trackBreweryWebsiteContentView();
             }
         }
 
         initActionBar();
         initWebView();
+    }
+
+    /**
+     * Tracks a Brewery Website Content View
+     */
+    private void trackBreweryWebsiteContentView() {
+        Answers.getInstance().logContentView(new ContentViewEvent()
+                .putContentName(mBreweryWebsiteUrl)
+                .putContentType(BREWERY_WEBSITE));
     }
 
     @Override

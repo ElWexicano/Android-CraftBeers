@@ -50,6 +50,7 @@ public class BeersActivity extends BaseActivity {
     private static final String EXTRA_PAGE_NUMBER = "ExtraPageNumber";
     private static final String EXTRA_NUMBER_OF_PAGES = "ExtraNumberOfPages";
     private static final String GMS_SEARCH_ACTION = "com.google.android.gms.actions.SEARCH_ACTION";
+    private static final String PAGE_NUMBER = "Page Number";
 
     /**
      * Mutables.
@@ -253,9 +254,6 @@ public class BeersActivity extends BaseActivity {
         mBeerKeywords = keywordSearch;
         mPageNumber = 1;
         search();
-
-        Answers.getInstance().logSearch(new SearchEvent()
-                .putQuery(keywordSearch));
     }
 
     /**
@@ -273,6 +271,22 @@ public class BeersActivity extends BaseActivity {
         mSwipeRefreshLayout.setRefreshing(true);
         mIsSearching = true;
         BeersService.startActionGetBeers(this, mBeerKeywords, mPageNumber);
+        trackSearchEvent();
+    }
+
+    /**
+     * Tracks a search event with Answers.
+     */
+    private void trackSearchEvent() {
+        SearchEvent searchEvent = new SearchEvent();
+
+        if (!mBeerKeywords.isEmpty()) {
+            searchEvent.putQuery(mBeerKeywords);
+        }
+
+        searchEvent.putCustomAttribute(PAGE_NUMBER, mPageNumber);
+
+        Answers.getInstance().logSearch(searchEvent);
     }
 
     /**

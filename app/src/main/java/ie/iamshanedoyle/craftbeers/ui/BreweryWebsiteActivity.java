@@ -26,7 +26,6 @@ public class BreweryWebsiteActivity extends BaseActivity {
      */
     private static final String SCREEN_NAME = "WebViewScreen";
     private static final String BREWERY_WEBSITE = "Brewery Website";
-    private static final String BREWERY = "Brewery";
 
     /**
      * Mutables

@@ -15,8 +15,8 @@ repositories {
 }
 
 android {
-    compileSdkVersion 21
-    buildToolsVersion "21.1.2"
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
 
     def Properties versionProps = new Properties()
     versionProps.load(new FileInputStream(file('version.properties')))
@@ -24,7 +24,7 @@ android {
     defaultConfig {
         applicationId "ie.iamshanedoyle.craftbeers"
         minSdkVersion 15
-        targetSdkVersion 21
+        targetSdkVersion 23
         versionCode versionProps['code'].toInteger()
         versionName "${versionProps['major']}.${versionProps['minor']}.${versionProps['patch']}"
     }
@@ -44,12 +44,13 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     // Support Libraries
-    compile 'com.android.support:appcompat-v7:21.0.2'
-    compile 'com.android.support:cardview-v7:21.0.2'
-    compile 'com.android.support:recyclerview-v7:21.0.2'
-    compile 'com.android.support:palette-v7:21.0.2'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:cardview-v7:23.4.0'
+    compile 'com.android.support:recyclerview-v7:23.4.0'
+    compile 'com.android.support:palette-v7:23.4.0'
     // Google Play Services
-    compile 'com.google.android.gms:play-services-base:6.5.87'
+    compile 'com.google.firebase:firebase-core:9.0.2'
+
     // GreenRobot EventBus
     compile 'de.greenrobot:eventbus:2.2.1'
     // Picasso Library
@@ -59,7 +60,7 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
     compile 'com.squareup.okhttp:okhttp:2.0.0'
     // Crashlytics
-    compile('com.crashlytics.sdk.android:crashlytics:2.5.6@aar') {
+    compile('com.crashlytics.sdk.android:crashlytics:2.5.7@aar') {
         transitive = true;
     }
     // Translucent System Bar
@@ -70,3 +71,5 @@ dependencies {
     testCompile 'org.robolectric:robolectric:3.0-rc2'
     testCompile 'org.mockito:mockito-core:1.10.19'
 }
+
+apply plugin: 'com.google.gms.google-services'

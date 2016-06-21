@@ -4,11 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.Toast;
 
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import de.greenrobot.event.EventBus;
-import ie.iamshanedoyle.craftbeers.CraftBeersApplication;
 import ie.iamshanedoyle.craftbeers.events.NetworkStateChangedEvent;
 
 /**
@@ -45,9 +43,12 @@ public abstract class BaseActivity extends ActionBarActivity {
      * Google Analytics Screen Tracking.
      */
     private void trackScreen() {
-        Tracker t = ((CraftBeersApplication) getApplication()).getTracker();
-        t.setScreenName(getScreenName());
-        t.send(new HitBuilders.ScreenViewBuilder().build());
+        FirebaseAnalytics firebaseAnalytics =
+                FirebaseAnalytics.getInstance(this);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, getScreenName());
+        firebaseAnalytics.logEvent("view_screen", bundle);
     }
 
     /**

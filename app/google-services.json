@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "599138203019",
+    "firebase_url": "https://craft-beers-9c6b0.firebaseio.com",
+    "project_id": "craft-beers-9c6b0",
+    "storage_bucket": "craft-beers-9c6b0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599138203019:android:b9bd822568071aa4",
+        "android_client_info": {
+          "package_name": "ie.iamshanedoyle.craftbeers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "599138203019-0qcqd0ml37ka7d91gq96jkilpi7m7v9g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ie.iamshanedoyle.craftbeers",
+            "certificate_hash": "1BD225EAFA4DE1D6E0EE3527D82140A46B3F100B"
+          }
+        },
+        {
+          "client_id": "599138203019-gi9gulmlldm9gd9718jpiqse6fkldp7a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAt_isiHS1ZX1MztYvNMTYwxsp6oCFOUHE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "599138203019-gi9gulmlldm9gd9718jpiqse6fkldp7a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

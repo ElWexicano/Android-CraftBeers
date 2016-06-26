@@ -208,7 +208,7 @@ public class BeerViewActivity extends BaseActivity implements ObservableScrollVi
      * Initialises the Action Bar.
      */
     private void initActionBar() {
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.fadingToolbar);
         setSupportActionBar(mToolbar);
         mActionBarBackgroundDrawable = mToolbar.getBackground();
         mInitialStatusBarColor = Color.TRANSPARENT;
@@ -242,14 +242,14 @@ public class BeerViewActivity extends BaseActivity implements ObservableScrollVi
             slideEnterTransition.excludeTarget(android.R.id.navigationBarBackground, true);
             slideEnterTransition.excludeTarget(android.R.id.statusBarBackground, true);
             slideEnterTransition.excludeTarget(android.R.id.background, true);
-            slideEnterTransition.excludeTarget(R.id.toolbar, true);
+            slideEnterTransition.excludeTarget(R.id.fadingToolbar, true);
             slideEnterTransition.excludeTarget(R.id.header, true);
             // Exit Transition
             Slide slideExitTransition = new Slide(Gravity.BOTTOM);
             slideExitTransition.excludeTarget(android.R.id.navigationBarBackground, true);
             slideExitTransition.excludeTarget(android.R.id.statusBarBackground, true);
             slideExitTransition.excludeTarget(android.R.id.background, true);
-            slideExitTransition.excludeTarget(R.id.toolbar, true);
+            slideExitTransition.excludeTarget(R.id.fadingToolbar, true);
             slideExitTransition.excludeTarget(R.id.header, true);
 
             getWindow().setEnterTransition(slideEnterTransition);

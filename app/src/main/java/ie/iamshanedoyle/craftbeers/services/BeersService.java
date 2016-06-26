@@ -109,6 +109,8 @@ public class BeersService extends IntentService {
 
         parametersMap.put("key", mApiKey);
         parametersMap.put("abv", "-10");
+        parametersMap.put("order", "createDate");
+        parametersMap.put("sort", "DESC");
         parametersMap.put("withBreweries", "Y");
 
         try {

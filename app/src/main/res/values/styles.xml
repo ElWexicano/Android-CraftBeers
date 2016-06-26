@@ -1,8 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light">
-        <item name="windowActionBar">false</item>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/beer_red</item>
         <item name="colorPrimaryDark">@color/beer_dark_red</item>
         <item name="colorAccent">@color/white</item>
@@ -10,8 +9,7 @@
         <item name="android:windowBackground">@color/beer_grey</item>
     </style>
 
-    <style name="AppThemeFadingActionBar" parent="Theme.AppCompat.Light">
-        <item name="windowActionBar">false</item>
+    <style name="AppThemeFadingActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/beer_red</item>
         <item name="colorPrimaryDark">@color/beer_dark_red</item>
         <item name="colorAccent">@color/white</item>
@@ -19,13 +17,12 @@
         <item name="android:windowBackground">@color/beer_grey</item>
     </style>
 
-    <style name="AppThemeWebView" parent="Theme.AppCompat.Light">
+    <style name="AppThemeWebView" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryDark">@color/beer_dark_red</item>
         <item name="colorAccent">@color/beer_red</item>
         <item name="android:textColorPrimary">@color/beer_red</item>
         <item name="android:textColorSecondary">@color/beer_red</item>
-        <item name="windowActionBar">false</item>
         <item name="android:windowBackground">@color/beer_grey</item>
     </style>
 

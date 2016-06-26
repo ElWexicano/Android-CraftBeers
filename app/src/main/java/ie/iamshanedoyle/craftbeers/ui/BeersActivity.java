@@ -83,7 +83,10 @@ public class BeersActivity extends BaseActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setElevation(10);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setElevation(10);
+        }
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
@@ -146,6 +149,12 @@ public class BeersActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        if (toolbar != null) {
+            toolbar.getBackground().setAlpha(255);
+        }
 
         if (mBeers.size() == 0) {
             search();

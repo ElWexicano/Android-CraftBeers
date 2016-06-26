@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/ActivityBase"
-    tools:context=".ui.SearchBeersActivity">
+    tools:context=".ui.BeersActivity">
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"

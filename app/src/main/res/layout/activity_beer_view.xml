@@ -223,7 +223,7 @@
     </ie.iamshanedoyle.craftbeers.ui.widgets.ObservableScrollView>
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/fadingToolbar"
         style="@style/MatchWidth"
         android:layout_gravity="top"
         android:background="?attr/colorPrimary"

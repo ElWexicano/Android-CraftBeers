@@ -24,7 +24,7 @@ public class BreweryWebsiteActivity extends BaseActivity {
     /**
      * Constants.
      */
-    private static final String SCREEN_NAME = "WebViewScreen";
+    private static final String SCREEN_NAME = "view_brewery_website";
     private static final String BREWERY_WEBSITE = "Brewery Website";
 
     /**
@@ -84,6 +84,17 @@ public class BreweryWebsiteActivity extends BaseActivity {
     @Override
     protected String getScreenName() {
         return SCREEN_NAME;
+    }
+
+    @Override
+    protected Bundle getScreenBundle() {
+        Bundle params = new Bundle();
+
+        if (mBreweryWebsiteUrl != null) {
+            params.putString("brewery_url", mBreweryWebsiteUrl);
+        }
+
+        return params;
     }
 
     /**

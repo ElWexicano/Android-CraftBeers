@@ -1,7 +1,7 @@
 package ie.iamshanedoyle.craftbeers.ui;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -14,13 +14,13 @@ import ie.iamshanedoyle.craftbeers.events.NetworkStateChangedEvent;
  *
  * @author Shane Doyle <@ElWexicano>
  */
-public abstract class BaseActivity extends ActionBarActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        trackScreen();
+        trackEvent(getScreenName(), getScreenBundle());
     }
 
     @Override
@@ -39,16 +39,18 @@ public abstract class BaseActivity extends ActionBarActivity {
 
     protected abstract String getScreenName();
 
+    protected abstract Bundle getScreenBundle();
+
     /**
-     * Google Analytics Screen Tracking.
+     * Google Analytics Event Tracking.
+     * @param eventName A String with the name of the event.
+     * @param bundle A Bundle of event parameters.
      */
-    private void trackScreen() {
+    protected void trackEvent(String eventName, Bundle bundle) {
         FirebaseAnalytics firebaseAnalytics =
                 FirebaseAnalytics.getInstance(this);
 
-        Bundle bundle = new Bundle();
-        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, getScreenName());
-        firebaseAnalytics.logEvent("view_screen", bundle);
+        firebaseAnalytics.logEvent(eventName, bundle);
     }
 
     /**

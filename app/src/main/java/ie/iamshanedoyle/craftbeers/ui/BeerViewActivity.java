@@ -20,6 +20,9 @@ import android.widget.TextView;
 
 import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.ContentViewEvent;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.squareup.picasso.Picasso;
 
 import ie.iamshanedoyle.craftbeers.R;
@@ -44,6 +47,7 @@ public class BeerViewActivity extends BaseActivity {
      * Mutables.
      */
     private Beer mBeer;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +74,40 @@ public class BeerViewActivity extends BaseActivity {
         initActionBar();
         initBeerUI();
         initBreweryUI();
+        initBannerAd();
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        mAdView.resume();
+    }
+
+    @Override
+    protected void onPause() {
+        mAdView.pause();
+
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        mAdView.destroy();
+
+        super.onDestroy();
+    }
+
+    /**
+     * Initialises the banner ad.
+     */
+    private void initBannerAd() {
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-1044754404385813~9008056680");
+
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     /**

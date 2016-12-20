@@ -53,6 +53,8 @@ dependencies {
     compile 'com.google.firebase:firebase-core:9.0.2'
     // Firebase Messaging
     compile 'com.google.firebase:firebase-messaging:9.0.2'
+    // Firebase Ads
+    compile 'com.google.firebase:firebase-ads:10.0.1'
     // GreenRobot EventBus
     compile 'de.greenrobot:eventbus:2.2.1'
     // Picasso Library

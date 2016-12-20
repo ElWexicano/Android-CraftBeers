@@ -15,8 +15,8 @@ repositories {
 }
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.1"
 
     def Properties versionProps = new Properties()
     versionProps.load(new FileInputStream(file('version.properties')))
@@ -24,7 +24,7 @@ android {
     defaultConfig {
         applicationId "ie.iamshanedoyle.craftbeers"
         minSdkVersion 15
-        targetSdkVersion 23
+        targetSdkVersion 25
         versionCode versionProps['code'].toInteger()
         versionName "${versionProps['major']}.${versionProps['minor']}.${versionProps['patch']}"
     }
@@ -44,14 +44,17 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     // Support Libraries
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:cardview-v7:23.4.0'
-    compile 'com.android.support:recyclerview-v7:23.4.0'
-    compile 'com.android.support:palette-v7:23.4.0'
+    compile 'com.android.support:appcompat-v7:25.0.1'
+    compile 'com.android.support:cardview-v7:25.0.1'
+    compile 'com.android.support:recyclerview-v7:25.0.1'
+    compile 'com.android.support:palette-v7:25.0.1'
+    compile 'com.android.support:design:25.0.1'
     // Google Play Services
     compile 'com.google.firebase:firebase-core:9.0.2'
     // Firebase Messaging
     compile 'com.google.firebase:firebase-messaging:9.0.2'
+    // Firebase Ads
+    compile 'com.google.firebase:firebase-ads:10.0.1'
     // GreenRobot EventBus
     compile 'de.greenrobot:eventbus:2.2.1'
     // Picasso Library
@@ -61,7 +64,7 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
     compile 'com.squareup.okhttp:okhttp:2.0.0'
     // Crashlytics
-    compile('com.crashlytics.sdk.android:crashlytics:2.5.7@aar') {
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.5@aar') {
         transitive = true;
     }
     // Translucent System Bar

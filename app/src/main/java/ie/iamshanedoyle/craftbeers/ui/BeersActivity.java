@@ -44,7 +44,7 @@ public class BeersActivity extends BaseActivity {
      * Constants.
      */
     public static final String EXTRA_BEER = "ExtraBeer";
-    private static final String SCREEN_NAME = "BeersScreen";
+    private static final String SCREEN_NAME = "view_search_results";
     private static final String EXTRA_BEERS = "ExtraBeers";
     private static final String EXTRA_KEYWORDS = "ExtraKeywords";
     private static final String EXTRA_PAGE_NUMBER = "ExtraPageNumber";
@@ -234,6 +234,17 @@ public class BeersActivity extends BaseActivity {
         return SCREEN_NAME;
     }
 
+    @Override
+    protected Bundle getScreenBundle() {
+        Bundle params = new Bundle();
+
+        if (mBeerKeywords != null) {
+            params.putString("search_term", mBeerKeywords);
+        }
+
+        return params;
+    }
+
     /**
      * Called when we receive a GetBeersEvent.
      *
@@ -262,6 +273,15 @@ public class BeersActivity extends BaseActivity {
         mBeers.clear();
         mBeerKeywords = keywordSearch;
         mPageNumber = 1;
+
+        Bundle params = new Bundle();
+
+        if (mBeerKeywords != null) {
+            params.putString("search_term", mBeerKeywords);
+        }
+
+        trackEvent("search", params);
+
         search();
     }
 

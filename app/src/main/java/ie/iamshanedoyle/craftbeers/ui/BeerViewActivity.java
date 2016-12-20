@@ -1,13 +1,9 @@
 package ie.iamshanedoyle.craftbeers.ui;
 
-import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -15,8 +11,6 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
 import android.text.style.TextAppearanceSpan;
-import android.transition.Slide;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,13 +20,14 @@ import android.widget.TextView;
 
 import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.ContentViewEvent;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.squareup.picasso.Picasso;
 
 import ie.iamshanedoyle.craftbeers.R;
 import ie.iamshanedoyle.craftbeers.models.Beer;
 import ie.iamshanedoyle.craftbeers.models.Brewery;
-import ie.iamshanedoyle.craftbeers.ui.widgets.ObservableScrollView;
-import ie.iamshanedoyle.craftbeers.utils.CompatUtils;
 import ie.iamshanedoyle.craftbeers.utils.GeneralUtils;
 
 /**
@@ -40,33 +35,19 @@ import ie.iamshanedoyle.craftbeers.utils.GeneralUtils;
  *
  * @author Shane Doyle <@ElWexicano>
  */
-public class BeerViewActivity extends BaseActivity implements ObservableScrollView.ScrollListener {
+public class BeerViewActivity extends BaseActivity {
 
     /**
      * Constants
      */
-    private static final String SCREEN_NAME = "BeerViewScreen";
-    private static final String EXTRA_LAST_RATIO = "LastRatio";
-    private static final String EXTRA_LAST_ALPHA = "LastAlpha";
-    private static final String EXTRA_LAST_DAMPED_SCROLL = "LastDampedScroll";
+    private static final String SCREEN_NAME = "view_beer";
     private static final String BEER = "Beer";
 
     /**
      * Mutables.
      */
     private Beer mBeer;
-    private int mLastAlpha = 0;
-    private float mLastRatio;
-    private int mLastDampedScroll;
-    private int mInitialStatusBarColor;
-    private int mFinalStatusBarColor;
-    private Drawable mActionBarBackgroundDrawable;
-
-    /**
-     * Views
-     */
-    private Toolbar mToolbar;
-    private View mHeader;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,19 +69,49 @@ public class BeerViewActivity extends BaseActivity implements ObservableScrollVi
 
         if (savedInstanceState != null) {
             mBeer = savedInstanceState.getParcelable(BeersActivity.EXTRA_BEER);
-            mLastAlpha = savedInstanceState.getInt(EXTRA_LAST_ALPHA);
-            mLastRatio = savedInstanceState.getFloat(EXTRA_LAST_RATIO);
-            mLastDampedScroll = savedInstanceState.getInt(EXTRA_LAST_DAMPED_SCROLL);
         }
 
         initActionBar();
-        initAnimations();
         initBeerUI();
         initBreweryUI();
+        initBannerAd();
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        mAdView.resume();
+    }
+
+    @Override
+    protected void onPause() {
+        mAdView.pause();
+
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        mAdView.destroy();
+
+        super.onDestroy();
     }
 
     /**
-     * Tracks a beer content view.
+     * Initialises the banner ad.
+     */
+    private void initBannerAd() {
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-1044754404385813~9008056680");
+
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+    }
+
+    /**
+     * Tracks a beer content view for Answers.
      */
     private void trackBeerContentView() {
         Answers.getInstance().logContentView(new ContentViewEvent()
@@ -112,9 +123,6 @@ public class BeerViewActivity extends BaseActivity implements ObservableScrollVi
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putParcelable(BeersActivity.EXTRA_BEER, mBeer);
-        outState.putInt(EXTRA_LAST_ALPHA, mLastAlpha);
-        outState.putFloat(EXTRA_LAST_RATIO, mLastRatio);
-        outState.putInt(EXTRA_LAST_DAMPED_SCROLL, mLastDampedScroll);
 
         super.onSaveInstanceState(outState);
     }
@@ -143,117 +151,31 @@ public class BeerViewActivity extends BaseActivity implements ObservableScrollVi
     }
 
     @Override
-    public void onScrollChanged(int t) {
-        final int headerHeight = mHeader.getHeight() - mToolbar.getHeight();
-        final float ratio = (float) Math.min(Math.max(t, 0), headerHeight) / headerHeight;
-        final int alpha = (int) (ratio * 255);
+    protected Bundle getScreenBundle() {
 
-        mLastAlpha = alpha;
-        mLastRatio = ratio;
+        Bundle params = new Bundle();
 
-        updateActionBarColor(alpha);
-        updateStatusBarColor(ratio);
-        updateParallaxEffect(t);
-    }
-
-    /**
-     * Updates the action bar background color.
-     *
-     * @param alpha A int of the alpha.
-     */
-    @SuppressWarnings("deprecation")
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    private void updateActionBarColor(int alpha) {
-        mActionBarBackgroundDrawable.setAlpha(alpha);
-
-        if (CompatUtils.isJellyBeanOrAbove()) {
-            mToolbar.setBackground(mActionBarBackgroundDrawable);
-        } else {
-            mToolbar.setBackgroundDrawable(mActionBarBackgroundDrawable);
+        if (mBeer != null) {
+            params.putString("beer_name", mBeer.getName());
+            params.putString("beer_id", mBeer.getId());
         }
-    }
 
-    /**
-     * Updates the status bar color.
-     *
-     * @param ratio A int of the ratio.
-     */
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private void updateStatusBarColor(float ratio) {
-        if (CompatUtils.isLollipopOrAbove()) {
-            int r = GeneralUtils.interpolate(Color.red(mInitialStatusBarColor),
-                    Color.red(mFinalStatusBarColor), 1 - ratio);
-            int g = GeneralUtils.interpolate(Color.green(mInitialStatusBarColor),
-                    Color.green(mFinalStatusBarColor), 1 - ratio);
-            int b = GeneralUtils.interpolate(Color.blue(mInitialStatusBarColor),
-                    Color.blue(mFinalStatusBarColor), 1 - ratio);
-            getWindow().setStatusBarColor(Color.rgb(r, g, b));
-        }
-    }
-
-    /**
-     * Updates the parallax effect.
-     *
-     * @param scrollPosition A int of the scroll position.
-     */
-    private void updateParallaxEffect(int scrollPosition) {
-        float damping = 0.5f;
-        int dampedScroll = (int) (scrollPosition * damping);
-        int offset = mLastDampedScroll - dampedScroll;
-        mHeader.offsetTopAndBottom(-offset);
-        mLastDampedScroll = dampedScroll;
+        return params;
     }
 
     /**
      * Initialises the Action Bar.
      */
     private void initActionBar() {
-        mToolbar = (Toolbar) findViewById(R.id.fadingToolbar);
-        setSupportActionBar(mToolbar);
-        mActionBarBackgroundDrawable = mToolbar.getBackground();
-        mInitialStatusBarColor = Color.TRANSPARENT;
-        mFinalStatusBarColor = getResources().getColor(R.color.beer_dark_red);
-
-        mHeader = findViewById(R.id.header);
-
-        ObservableScrollView scrollView = (ObservableScrollView) findViewById(R.id.scrollview);
-        scrollView.addCallbacks(this);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.fadingToolbar);
+        setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();
+
         if (actionBar != null) {
             actionBar.setHomeButtonEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle(mBeer.getName() + " " + getString(R.string.beer));
-        }
-
-        updateActionBarColor(mLastAlpha);
-        updateStatusBarColor(mLastRatio);
-        updateParallaxEffect(0);
-    }
-
-    /**
-     * Initialises the animations.
-     */
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private void initAnimations() {
-        if (CompatUtils.isLollipopOrAbove()) {
-            // Enter Transition
-            Slide slideEnterTransition = new Slide(Gravity.BOTTOM);
-            slideEnterTransition.excludeTarget(android.R.id.navigationBarBackground, true);
-            slideEnterTransition.excludeTarget(android.R.id.statusBarBackground, true);
-            slideEnterTransition.excludeTarget(android.R.id.background, true);
-            slideEnterTransition.excludeTarget(R.id.fadingToolbar, true);
-            slideEnterTransition.excludeTarget(R.id.header, true);
-            // Exit Transition
-            Slide slideExitTransition = new Slide(Gravity.BOTTOM);
-            slideExitTransition.excludeTarget(android.R.id.navigationBarBackground, true);
-            slideExitTransition.excludeTarget(android.R.id.statusBarBackground, true);
-            slideExitTransition.excludeTarget(android.R.id.background, true);
-            slideExitTransition.excludeTarget(R.id.fadingToolbar, true);
-            slideExitTransition.excludeTarget(R.id.header, true);
-
-            getWindow().setEnterTransition(slideEnterTransition);
-            getWindow().setEnterTransition(slideExitTransition);
         }
     }
 

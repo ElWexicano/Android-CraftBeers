@@ -16,14 +16,14 @@ We all enjoy drinking beer but please make sure to drink responsibly!
 
 We're always looking at ways to improve the app so please let us know what features you would like or not 😉
 
+[Download Discover Craft Beer on the Play Store](https://play.google.com/store/apps/details?id=ie.iamshanedoyle.craftbeers)
 
-
-# Beers Screen
+## Beers Screen
 Displays a list of beers in which the user can perform keyword search.
 
 ![Beers Screen](https://github.com/ElWexicano/Android-CraftBeers/blob/master/images/Beers%20Screen.png)
 
-# Beer View Screen
+## Beer View Screen
 Displays more information about a particular beer such as the description and brewery information.
 
 ![Beers Screen](https://github.com/ElWexicano/Android-CraftBeers/blob/master/images/Beer%20View%20Screen.png)

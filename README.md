@@ -5,10 +5,10 @@ Just search for your favourite or explore other beers and bingo you've found a n
 
 Discover Craft Beers includes:-
 
-• Find your perfect beer with thousands to search from.
-• See all the important detail so you can know everything about each beer.
-• Explore other beers that the company brews.
-• Plus many more features...
+* Find your perfect beer with thousands to search from.
+* See all the important detail so you can know everything about each beer.
+* Explore other beers that the company brews.
+* Plus many more features...
 
 Download Craft Beers now so that you spend less time finding beers and more time enjoying them!
 

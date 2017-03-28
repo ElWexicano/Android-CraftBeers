@@ -6,6 +6,10 @@ It consists of the following two screens.
 # Beers Screen
 Displays a list of beers in which the user can perform keyword search.
 
+![Beers Screen](https://github.com/ElWexicano/Android-CraftBeers/blob/master/images/Beers%20Screen.png)
+
 # Beer View Screen
 Displays more information about a particular beer such as the description and brewery information.
+
+![Beers Screen](https://github.com/ElWexicano/Android-CraftBeers/blob/master/images/Beer%20View%20Screen.png)
 

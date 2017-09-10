@@ -3,6 +3,10 @@ package ie.iamshanedoyle.craftbeers.adapters;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
+import android.text.style.TextAppearanceSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,22 +56,20 @@ public class BeersAdapter extends RecyclerView.Adapter<BeersAdapter.ViewHolder> 
             viewHolder.textViewDescription.setText(beer.getDescription());
         }
 
-        if (beer.hasBrewery()) {
+        setAttributeText(viewHolder.textViewStyle,
+                mContextReference.get().getString(R.string.style), beer.getStyleAsString());
 
-            String brewedYear = "";
+        setAttributeText(viewHolder.textViewAbv,
+                mContextReference.get().getString(R.string.abv), beer.getAbvAsString());
 
-            if (beer.getYear() != 0) {
-                brewedYear = "since " + beer.getYear();
-            }
+        setAttributeText(viewHolder.textViewIbu,
+                mContextReference.get().getString(R.string.ibu), beer.getIbuAsString());
 
-            String brewedBy = String.format(mContextReference.get().getString(R.string.brewed_by),
-                    beer.getBrewery().getName(), brewedYear);
-            CharSequence styledText = Html.fromHtml(brewedBy);
-            viewHolder.textViewBreweryTitle.setText(styledText);
-        } else {
-            viewHolder.textViewBreweryTitle.setText(
-                    mContextReference.get().getString(R.string.no_brewery));
-        }
+        setAttributeText(viewHolder.textViewGlass,
+                mContextReference.get().getString(R.string.glass), beer.getGlassAsString());
+
+        setAttributeText(viewHolder.textViewYear,
+                mContextReference.get().getString(R.string.year), beer.getYearAsString());
 
         if (beer.hasLabel()) {
             Picasso.with(mContextReference.get())
@@ -98,7 +100,11 @@ public class BeersAdapter extends RecyclerView.Adapter<BeersAdapter.ViewHolder> 
 
         TextView textViewTitle;
         TextView textViewDescription;
-        TextView textViewBreweryTitle;
+        TextView textViewAbv;
+        TextView textViewIbu;
+        TextView textViewGlass;
+        TextView textViewYear;
+        TextView textViewStyle;
         ImageView imageViewLabel;
 
         public ViewHolder(View v) {
@@ -106,8 +112,27 @@ public class BeersAdapter extends RecyclerView.Adapter<BeersAdapter.ViewHolder> 
 
             textViewTitle = (TextView) v.findViewById(R.id.textViewBeerTitle);
             textViewDescription = (TextView) v.findViewById(R.id.textViewBeerDescription);
-            textViewBreweryTitle = (TextView) v.findViewById(R.id.textViewBreweryTitle);
+            textViewAbv = (TextView) v.findViewById(R.id.textViewAbv);
+            textViewIbu = (TextView) v.findViewById(R.id.textViewIbu);
+            textViewGlass = (TextView) v.findViewById(R.id.textViewGlass);
+            textViewYear = (TextView) v.findViewById(R.id.textViewYear);
+            textViewStyle = (TextView) v.findViewById(R.id.textViewStyle);
             imageViewLabel = (ImageView) v.findViewById(R.id.imageViewBeerLabel);
+
         }
+    }
+
+    /**
+     * Sets an attribute text value.
+     *
+     * @param textView The TextView to update.
+     * @param label    A String of the attribute label.
+     * @param value    A String of the attribute value.
+     */
+    private void setAttributeText(TextView textView, String label, String value) {
+        SpannableString spannableString = new SpannableString(label + "\n" + value);
+        spannableString.setSpan(new TextAppearanceSpan(mContextReference.get(), R.style.BeerValue),
+                label.length(), spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textView.setText(spannableString);
     }
 }

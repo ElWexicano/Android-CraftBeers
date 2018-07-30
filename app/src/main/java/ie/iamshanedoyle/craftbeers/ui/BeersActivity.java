@@ -19,9 +19,6 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
 
-import com.crashlytics.android.answers.Answers;
-import com.crashlytics.android.answers.SearchEvent;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -307,15 +304,18 @@ public class BeersActivity extends BaseActivity {
      * Tracks a search event with Answers.
      */
     private void trackSearchEvent() {
-        SearchEvent searchEvent = new SearchEvent();
+//        SearchEvent searchEvent = new SearchEvent();
+//
+//        if (!mBeerKeywords.isEmpty()) {
+//            searchEvent.putQuery(mBeerKeywords);
+//        }
+//
+//        searchEvent.putCustomAttribute(PAGE_NUMBER, mPageNumber);
+//
+//        Answers.getInstance().logSearch(searchEvent);
 
-        if (!mBeerKeywords.isEmpty()) {
-            searchEvent.putQuery(mBeerKeywords);
-        }
+        // TODO: 30/07/2018 Track search event
 
-        searchEvent.putCustomAttribute(PAGE_NUMBER, mPageNumber);
-
-        Answers.getInstance().logSearch(searchEvent);
     }
 
     /**

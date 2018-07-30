@@ -19,7 +19,15 @@
           "client_type": 1,
           "android_info": {
             "package_name": "ie.iamshanedoyle.craftbeers",
-            "certificate_hash": "1BD225EAFA4DE1D6E0EE3527D82140A46B3F100B"
+            "certificate_hash": "1bd225eafa4de1d6e0ee3527d82140a46b3f100b"
+          }
+        },
+        {
+          "client_id": "599138203019-utqhrvtaqno29q1j13q8e9rgvh950a8u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ie.iamshanedoyle.craftbeers",
+            "certificate_hash": "d477ab9563f193472263a4838722ba5ede001d70"
           }
         },
         {

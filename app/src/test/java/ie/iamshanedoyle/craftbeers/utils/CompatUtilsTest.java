@@ -10,11 +10,11 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(emulateSdk = Build.VERSION_CODES.JELLY_BEAN)
+@Config(sdk = Build.VERSION_CODES.JELLY_BEAN)
 public class CompatUtilsTest {
 
     @Test
-    @Config(emulateSdk = Build.VERSION_CODES.LOLLIPOP)
+    @Config(sdk = Build.VERSION_CODES.LOLLIPOP)
     public void testIsLollipopOrAbove() throws Exception {
         Assert.assertTrue("IsLollipopOrAbove should be true", CompatUtils.isLollipopOrAbove());
     }

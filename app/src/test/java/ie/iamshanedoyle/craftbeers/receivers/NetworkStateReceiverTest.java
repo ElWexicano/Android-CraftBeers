@@ -17,11 +17,10 @@ import org.robolectric.shadows.ShadowApplication;
 
 
 @RunWith(RobolectricTestRunner.class)
-@Config(emulateSdk = Build.VERSION_CODES.LOLLIPOP)
+@Config(sdk = Build.VERSION_CODES.LOLLIPOP)
 public class NetworkStateReceiverTest {
 
     @Test
-    @Ignore
     public void testIsListening() {
         ShadowApplication shadowApplication = Shadows.shadowOf(RuntimeEnvironment.application);
         Intent intent = new Intent(ConnectivityManager.CONNECTIVITY_ACTION);

@@ -18,8 +18,6 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.crashlytics.android.answers.Answers;
-import com.crashlytics.android.answers.ContentViewEvent;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -114,10 +112,12 @@ public class BeerViewActivity extends BaseActivity {
      * Tracks a beer content view for Answers.
      */
     private void trackBeerContentView() {
-        Answers.getInstance().logContentView(new ContentViewEvent()
-                .putContentName(mBeer.getName())
-                .putContentType(BEER)
-                .putContentId(mBeer.getId()));
+//        Answers.getInstance().logContentView(new ContentViewEvent()
+//                .putContentName(mBeer.getName())
+//                .putContentType(BEER)
+//                .putContentId(mBeer.getId()));
+
+        // TODO: 30/07/2018 Track content viewed
     }
 
     @Override

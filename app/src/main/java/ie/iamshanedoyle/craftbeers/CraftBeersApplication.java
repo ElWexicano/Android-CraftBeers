@@ -2,10 +2,6 @@ package ie.iamshanedoyle.craftbeers;
 
 import android.app.Application;
 
-import com.crashlytics.android.Crashlytics;
-
-import io.fabric.sdk.android.Fabric;
-
 /**
  * Extends the Application.
  *
@@ -21,6 +17,8 @@ public class CraftBeersApplication extends Application {
     }
 
     private void startCrashlytics() {
-        Fabric.with(this, new Crashlytics());
+//        Fabric.with(this, new Crashlytics());
+
+        // TODO: 30/07/2018 start tracking.
     }
 }

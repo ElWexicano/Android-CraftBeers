@@ -8,9 +8,6 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.crashlytics.android.answers.Answers;
-import com.crashlytics.android.answers.ContentViewEvent;
-
 import ie.iamshanedoyle.craftbeers.R;
 
 /**
@@ -57,9 +54,11 @@ public class BreweryWebsiteActivity extends BaseActivity {
      * Tracks a Brewery Website Content View
      */
     private void trackBreweryWebsiteContentView() {
-        Answers.getInstance().logContentView(new ContentViewEvent()
-                .putContentName(mBreweryWebsiteUrl)
-                .putContentType(BREWERY_WEBSITE));
+//        Answers.getInstance().logContentView(new ContentViewEvent()
+//                .putContentName(mBreweryWebsiteUrl)
+//                .putContentType(BREWERY_WEBSITE));
+
+        // TODO: 30/07/2018 Track content viewed
     }
 
     @Override
